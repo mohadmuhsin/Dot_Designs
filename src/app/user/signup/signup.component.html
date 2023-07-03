@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+<section class="flex items-center justify-center min-h-screen bg-white">
+  <div class="container mx-auto max-w-screen-xl">
+    <div class="flex flex-col md:flex-row justify-center">
+      <div class="w-full md:w-1/2 bg-cover bg-center bg-no-repeat rounded-tl-lg rounded-bl-lg md:rounded-bl-none md:rounded-tr-none md:bg-none" style="background-image: url('assets/Vinyl\ Decal\ \ welcome\ We\'re\ Glad\ You\'re\ -\ Etsy.png');"></div>
+      <div class="w-full md:w-1/2 bg-[#0B1C39] rounded-tr-lg rounded-br-lg shadow-lg p-12 font-inter">
+        <div class="w-full bg-white rounded p-12">
+          <!-- <h5 class="font-normal mb-4 font-medium" style="letter-spacing: 1px;">Sign into your account</h5> -->
+          <form [formGroup]="form" (submit)="signup()">
+            <div class="mb-5">
+              <label class="block mb-1 text-md" for="form2Example17">Enter your name</label>
+              <input type="text" id="form2Example17" formControlName="name" class="form-input w-full h-12 rounded border pl-3 focus:outline-none focus:border-blue-500" placeholder="Name" />
+            </div>
+            <div class="mb-5">
+              <label class="block mb-1 text-md" for="form2Example27">Enter your Email</label>
+              <input type="email" id="form2Example27" formControlName="email" class="form-input w-full h-12 rounded border pl-3 focus:outline-none focus:border-blue-500" placeholder="Email" />
+            </div>
+            <div class="mb-5">
+                <label class="block mb-1 text-md" for="form2Example27">Enter your Mobile number</label>
+                <input type="number" id="form2Example27" formControlName="mobileNumber" class="form-input w-full h-12 rounded border pl-3 focus:outline-none focus:border-blue-500" placeholder="Mobile Number" style="-moz-appearance: textfield;" />
+              </div>
+              
+            <div class="mb-5">
+              <label class="block mb-1 text-md" for="form2Example27">Enter your Password</label>
+              <input type="password" id="form2Example27" formControlName="password" class="form-input w-full h-12 rounded border pl-3 focus:outline-none focus:border-blue-500" placeholder="Confirm Password" />
+            </div>
+            <div class="mb-8">
+              <button class="w-full bg-[#0B1C39] hover:bg-[FFD700] hover:text-[#0B1C39] text-white font-medium py-4 px-4 rounded" type="submit">SIGN UP</button>
+            </div>
+          </form>
+            <div class="flex justify-center items-center my-2">
+              <p>Or Signup With</p>
+            </div>
+            <div class="mb-4">
+              <button class="w-full bg-[#0B1C39] hover:bg-[FFD700] hover:text-[#0B1C39]  text-white font-medium py-4 px-4 rounded">Signup With Google</button>
+              <!-- (click)="signInWithGoogle()" -->
+            </div>
+            <div class="text-center">
+              <!-- <a class="text-sm text-gray-500" href="#!">Forgot password?</a> -->
+              <p class="mt-2 text-gray-700">Already have an account? <a routerLink="/login" class="text-blue-500">Login</a></p>
+            </div>
+            <div class="flex justify-between text-sm text-gray-500">
+              <!-- <a href="#!">Terms of use.</a>
+              <a href="#!">Privacy policy</a> -->
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
