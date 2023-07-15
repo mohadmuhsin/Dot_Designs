@@ -1,0 +1,10 @@
+#sidebar-multi-level-sidebar {
+  transition-property: transform;
+  transition-duration: 0.3s;
+}
+
+#sidebar-toggle-button {
+  transition-property: transform;
+  transition-duration: 0.3s;
+}
+

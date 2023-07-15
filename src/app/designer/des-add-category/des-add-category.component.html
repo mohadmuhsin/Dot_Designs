@@ -1,0 +1,37 @@
+<app-designer-navbar></app-designer-navbar>
+<div class="mt-16"></div>
+<app-sidebar></app-sidebar>
+<div class="p-2 sm:ml-64 mt-16 z-40">
+
+    <div class="p-4">
+      <form [formGroup]="form" (submit)="submit()" class="shadow-md rounded-b-md">
+        <div class="bg-[#0B1C39] rounded-t-md p-4">
+          <h2 class="text-white text-lg font-bold bg-[#0B1C39] p-2">ADD CATEGORY</h2>
+        </div>
+        <div class="mt-4 p-4">
+  
+          <div class="mb-4 px-5">
+            <label for="category" class="block text-gray-700 font-bold mb-2">Category Name:</label>
+            <input type="text" id="category" formControlName="category"  class="shadow-md rounded focus:outline-none  py-2 px-3 w-full" placeholder="Enter category name">
+          </div>
+          <div class="mb-4 px-5">
+            <label for="image"  class="block text-gray-700 font-bold  mb-2">Image</label>
+
+            <input  id="image" formControlName="image" class="shadow-md rounded py-2 px-3 w-full" #imageInput placeholder="choose a file">
+        </div> 
+          <div class="flex justify-end mx-auto px-5 py-5">
+            <button type="submit" class="bg-[#0B1C39] hover:bg-blue-600 mr-4 text-white py-3 px-6 rounded ">
+              CANCEL
+            </button>
+            <button  class="bg-[#0B1C39] hover:bg-blue-600 text-white py-3 px-6 rounded">
+              SEND REQUEST
+            </button>
+          </div>
+  
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  

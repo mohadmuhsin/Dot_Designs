@@ -1,29 +1,21 @@
 <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-  <div class="flex  items-center justify-between p-4">
+  <div class="flex items-center justify-between p-4">
     <!-- Logo -->
-    <a href="#" class="flex items-center">
-      <img
-        src="assets/dot-designs-low-resolution-logo-color-on-transparent-background.png"
-        class="h-8 mr-3"
-        alt="Flowbite Logo"
-      />
+    <a href="#" class="flex items-center ml-4">
+      <img src="assets/dot-designs-low-resolution-logo-color-on-transparent-background.png" class="h-8 mr-3" alt="Flowbite Logo" />
     </a>
-
     <!-- Mobile Menu Toggle Button -->
     <button
       (click)="toggleNavbarDropdown()"
       type="button"
       class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      id="menu-button"
+      aria-controls="menu-button"
       [attr.aria-expanded]="isNavbarDropdownOpen ? 'true' : 'false'"
+      aria-haspopup="true"
     >
       <span class="sr-only">Open main menu</span>
-      <svg
-        class="w-6 h-6"
-        aria-hidden="true"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path
           fill-rule="evenodd"
           d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -33,15 +25,15 @@
     </button>
 
     <!-- Navbar Dropdown (Visible on larger screens) -->
-    <div class="hidden md:block">
+    <div class="hidden md:block mr-4">
       <ul
         class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ml-auto justify-end"
       >
         <!-- Home Link -->
         <li>
           <a
-            href="#"
-            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
+            routerLink="/"
+            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
             aria-current="page"
           >
             Design Gallery
@@ -50,65 +42,46 @@
 
         <!-- Dropdown Menu -->
         <li>
-          <button
-            (click)="toggleDropdownNavbar()"
-            id="dropdownNavbarLink"
-            class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-            [attr.aria-expanded]="isDropdownNavbarOpen ? 'true' : 'false'"
-          >
-            Cities
-            <svg
-              class="w-5 h-5 ml-1"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-          <!-- Dropdown menu -->
-          <div
-            id="dropdownNavbar"
-            [class.open]="isDropdownNavbarOpen"
-            class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
-          >
-            <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-400"
-              aria-labelledby="dropdownLargeButton"
-            >
-              <li>
-                <a
-                  routerLink=""
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Dashboard</a
-                >
-              </li>
-              <li>
-                <a
-                  routerLink=""
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Settings</a
-                >
-              </li>
-              <li>
-                <a
-                  routerLink=""
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Earnings</a
-                >
-              </li>
-            </ul>
-            <div class="py-1">
-              <a
-                routerLink=""
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-                >Sign out</a
+          <div class="relative inline-block text-left">
+            <div>
+              <button
+                class="inline-flex gap-x-1 block py-2 pl-3  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:darkLogout:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                id="drop-down"
+                [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'"
+                aria-haspopup="true"
+                (click)="dropdown()"
               >
+                Options
+                <svg class="- mt-1 h-5 w-5 text-white hover:text-blue-700" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+            <!-- Dropdown menu -->
+            <div
+              class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              [style.display]="isDropdownOpen ? 'block' : 'none'"
+              aria-labelledby="drop-down"
+              tabindex="-1"
+              id="dropdown-menu"
+            >
+              <div class="py-1" role="none">
+                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
+                  Account settings
+                </a>
+                <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
+                <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
+                <form method="POST" action="#" role="none">
+                  <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
+                </form>
+              </div>
             </div>
           </div>
         </li>
@@ -116,7 +89,8 @@
         <!-- Other Links -->
         <li>
           <a
-            routerLink="/desingnerLogin"
+            routerLink="/designer_login"
+            target="_blank"
             class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
           >
             Join Us
@@ -130,7 +104,7 @@
             Visit Us
           </a>
         </li>
-        <li>
+        <li *ngIf="!authenticated">
           <a
             routerLink="/login"
             class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
@@ -138,7 +112,47 @@
             Login/Signup
           </a>
         </li>
+        
+        <li *ngIf="authenticated ">
+          <a
+            id="menu-button"
+            [attr.aria-expanded]="isMenuOpen ? 'true' : 'false'"
+            aria-haspopup="true"
+            (click)="toggleMenu()"
+            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+          >
+          Account
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- Menu Content (Visible on small screens) -->
+<div
+  aria-orientation="vertical"
+  [style.display]="isNavbarDropdownOpen ? 'block' : 'none'"
+  aria-labelledby="menu-button"
+  tabindex="-1"
+  id="navbar-dropdown"
+  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+>
+  <!-- Active: "bg-gray-100", Not Active: "" -->
+  <a (click)="toggleNavbarDropdown()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-0">Design Gallery</a>
+  <a  class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-1">Options</a>
+  <a  class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Join Us</a>
+  <a  routerLink="/designer_login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-3">Visit Us</a>
+  <a  *ngIf="!authenticated" routerLink="/login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-4">Login/Signup</a>
+  <a  *ngIf="authenticated"   class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-5">Logout</a>
+</div>
+
+<div  aria-orientation="vertical" [style.display]="isMenuOpen ? 'block' : 'none'" aria-labelledby="menu-button" tabindex="-1" id="dropdown-menu"   class="absolute  right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+  <!-- Active: "bg-gray-100", Not Active: "" -->
+  <a  class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">My Orders</a>
+  <a  class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">MY Wishlist</a>
+  <a *ngIf="!authenticated" routerLink="/login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Login/Signup</a>
+  <a (click)="logout()" *ngIf="authenticated" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Logout</a>
+
+</div>
+

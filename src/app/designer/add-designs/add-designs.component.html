@@ -1,0 +1,57 @@
+<app-designer-navbar></app-designer-navbar>
+<div class="mt-16"></div>
+<app-sidebar></app-sidebar>
+<div class="p-2 sm:ml-64 mt-16 z-40">
+
+  <div class="p-4">
+    <form [formGroup]="form" (submit)="submit()" class="shadow-md rounded-b-md">
+      <div class="bg-[#0B1C39] rounded-t-md p-4">
+        <h2 class="text-white text-lg lg:text-xl font-bold bg-[#0B1C39] p-2">ADD DESIGN</h2>
+      </div>
+      <div class="mt-4 p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="mb-2 px-5">
+            <!-- <label for="designName" class="block text-gray-700 font-normal mb-2">Design Name</label> -->
+            <input type="text" id="designName" formControlName="designName" class="shadow-md rounded  py-4  px-3 focus:outline-blue-900 w-full" placeholder="Enter design name">
+          </div>
+          <div class="mb-2 px-5">
+            <input type="text" id="materialType" formControlName="materialType" class="shadow-md rounded  py-4  px-3 focus:outline-blue-900 w-full" placeholder="Enter material type">
+          </div>
+       
+          <!-- <div class="mb-2 px-5">
+            <input type="text" id="shape" formControlName="shape" class="shadow-md rounded  py-4  px-3 focus:outline-blue-900 w-full" placeholder="Enter shape of design">
+          </div> -->
+          <div class="mb-2 px-5">
+            <input type="text" id="finishType" formControlName="finishType" class="shadow-md rounded  py-4  px-3 focus:outline-blue-900 w-full" placeholder="Enter finish type">
+          </div>
+          <div class="mb-2 px-5">
+            <input type="text" id="finishType" formControlName="description" class="shadow-md rounded  py-4  px-3 focus:outline-blue-900 w-full" placeholder="Enter description">
+          </div>
+          <div class="mb-2 px-5 max-h-10 ">
+            <input type="text" id="category" formControlName="category" class="shadow-md rounded py-4 px-3 focus:outline-blue-900 w-full" placeholder="Select a category" readonly (click)="showDropdown = true" [value]="selectedCategory?.name">
+            <ul class="bg-white rounded-md shadow-md mt-2  overflow-y-auto"   *ngIf="showDropdown">
+              <li *ngFor="let category of filteredCategories" (click)="selectCategory(category)">
+                {{ category.name }}
+              </li>
+            </ul>
+          </div>
+     
+          <div class="mb-4 px-5">
+            <input id="image" formControlName="image" class="shadow-md rounded py-4 px-3 focus:outline-blue-900 w-full" #imageInput type="file" placeholder="Choose a file" multiple>
+          </div>
+          
+         
+        </div>
+
+        <div class="flex justify-end mx-auto px-5 py-5">
+          <button routerLink="/designer/designs" class="bg-[#0B1C39] hover:bg-[#FFD700] transition duration-200 mr-4 text-white hover:text-[#000000] py-3 px-6 rounded">
+            BACK
+          </button>
+          <button class="bg-[#0B1C39] hover:bg-[#FFD700] text-white hover:text-[#000000] transition duration-200 py-3  px-6 rounded">
+           SUBMIT
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

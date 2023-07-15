@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 // import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -30,7 +29,20 @@ export class SignupComponent implements OnInit {
       mobileNumber: '',
       password: '',
     });
+    const isLoggedIn = localStorage.getItem('token');
+    if (isLoggedIn) {
+      this.router.navigate(['/']);
+    }
   }
+
+
+
+
+
+
+
+
+
 
   // user!: SocialUser | null;
 
@@ -54,10 +66,11 @@ export class SignupComponent implements OnInit {
 
   signup() {
     const user = this.form.getRawValue();
+    const phone = String(user.mobileNumber);
     if (
       user.name.trim() === '' ||
       user.email.trim() === '' ||
-      user.mobileNumber === '' ||
+      phone.trim() === '' ||
       user.password.trim() === ''
     ) {
       console.log('login');
@@ -67,9 +80,7 @@ export class SignupComponent implements OnInit {
     } else {
       this.service.signUp(user).subscribe(
         () => {
-          console.log("here it is");
-          
-          this.router.navigate(['/login'])
+          this.router.navigate(['/login']);
           this.toastr.warning('verify your email', 'Warning!');
         },
         (err) => {

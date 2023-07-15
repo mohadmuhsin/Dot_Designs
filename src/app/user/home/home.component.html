@@ -1,2 +1,144 @@
-<app-header></app-header>
-<p>home works!</p>
+
+<div *ngIf="Loader" class="spinner fixed center h-screen w-screen z-50 flex justify-center items-center"></div>
+
+
+
+
+
+<app-header *ngIf="!Loader"></app-header>
+
+<!-- carousel -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css"
+/>
+<div *ngIf="!Loader" class="glide">
+  <div class="glide__track" data-glide-el="track">
+    <ul class="glide__slides">
+      <li class="glide__slide">
+        <img class="w-full h-full object-cover" src="assets/Vinyl Decal  welcome We're Glad You're - Etsy.png" alt="First slide">
+      </li>
+      <li class="glide__slide">
+        <img class="w-full h-full object-cover" src="assets/Screenshot from 2023-06-26 10-45-53.png" alt="Second slide">
+      </li>
+      <li class="glide__slide">
+        <img class="w-full h-full object-cover" src="assets/Vinyl Decal  welcome We're Glad You're - Etsy.png" alt="Third slide">
+      </li>
+    </ul>
+  </div>
+
+  <div class="glide__arrows" data-glide-el="controls">
+    <button class="glide__arrow glide__arrow--prev" data-glide-dir="<">
+    </button>
+    <button class="glide__arrow glide__arrow--next" data-glide-dir=">">
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!Loader" class="center items-center">
+<!-- captions -->
+<div  class="ml-5 mt-10 mb-3">
+  <h1 class="text-2xl lg:text-4xl md:text-3xl mt-3">Design Portfolio</h1>
+  <h4 class="text-lg lg:text-xl md:text-lg">
+    End-to-end designs by
+    <span class="font-bold lg:text-lg md:text-base">talented designers.</span>
+    Your search ends here.
+  </h4>
+</div>
+
+<!-- cards -->
+<div *ngIf="filteredCategories" class="flex flex-wrap  mx-5 lg:mx-4"> <!-- Remove justify-center for left alignment on small screens -->
+  <div *ngFor="let category of filteredCategories" [routerLink]="['/design_list',category._id]"  class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-1 mb-5 lg:mb-5 ">
+    <div class="relative rounded-lg shadow-md  d" style="height: 350px; width: calc(100% - 15px);">
+      <a >
+        <img class="rounded-lg w-full h-full object-cover" [src]="category.image" />
+        <div class="absolute rounded-b-lg bottom-0 left-0 w-full bg-opacity-75 bg-gray-900 p-3">
+          <span class="text-xl lg:text-xl font-normal text-white">{{category.name}}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- <div class="mx-2" > -->
+  <section *ngIf="!Loader" class="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
+    <div class="px-4 mx-auto max-w-screen-xl text-center  py-16 lg:py-35"> <!-- Reduced py-24 and lg:py-56 to py-16 and lg:py-40 -->
+        <h1 class="mb-4 text-4xl font-semibold tracking-wide leading-none text-white md:text-5xl lg:text-6xl">Meet our talented designers, shaping spaces with creativity.</h1>
+        <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"></p>
+        <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-[#0B1C39] hover:text-white  bg-[FFD700] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+              Explore Designers
+                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
+            <a href="#" class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white  border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
+              Explore Designs
+            </a>  
+        </div>
+    </div>
+  </section>
+  
+
+<!-- </div> -->
+<!-- script for carousel and style  -->
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script>
+  new Glide(".glide", {
+    type: "carousel",
+    perView: 1,
+    autoplay: 5000, // Add autoplay option
+    animationDuration: 1000, // Add animation duration option
+    hoverpause: true, // Pause on hover
+    keyboard: true, // Enable keyboard navigation
+    breakpoints: {
+      640: {
+        perView: 1,
+        height: "200px", // Adjust the height for small screens
+      },
+      768: {
+        perView: 1,
+        height: "300px", // Adjust the height for medium screens
+      },
+      1024: {
+        perView: 2,
+        height: "400px", // Adjust the height for large screens
+      },
+    },
+  }).mount();
+</script>
+
+<style>
+  /* Custom CSS styles */
+  .glide__slide img {
+    height: 500px; /* Adjust the height for default screen size */
+    object-fit: cover;
+    width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    /* Styles for small screens */
+    .glide__slide img {
+      height: 200px;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 767px) {
+    /* Styles for medium screens */
+    .glide__slide img {
+      height: 300px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Styles for large screens */
+    .glide__slide img {
+      height: 400px;
+    }
+  }
+</style>

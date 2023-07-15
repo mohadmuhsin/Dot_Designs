@@ -1,0 +1,66 @@
+<app-admin-nav></app-admin-nav>
+<app-admin-sidebar></app-admin-sidebar>
+<div class="p-2 sm:ml-64  z-40">
+    <div class="p-4">
+        <div class="center items-center">
+            <div class="relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg">
+              <table class=" sm:w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-white uppercase bg-[#0B1C39]">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-lg">
+                      Image
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-lg">
+                      Category
+                    </th>
+                    <th scope="col" class="px-3 py-3 text-lg">
+                      Action
+                    </th>
+                    <th scope="col" class="  text-lg">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="data">
+                  <tr *ngFor="let item of data; let i = index" class="bg-white border-b hover:bg-gray-50">
+                    <td class="w-32 p-4">
+                        <img [src]="item.image" class="w-28 h-28 rounded-lg object-contain sm:w-20 sm:h-20" alt="Apple Watch">
+                      </td>
+                    <td class="px-6 py-4 text-lg font-medium text-gray-900">
+                      {{item.name}}
+                    </td>
+                    <td class="px-3 py-4 text-md font-medium text-gray-900">
+                      <button  class=" font-medium text-red-600">RECJECT</button>
+                    </td>
+                    <td class="px-3 py-4">
+                      <button  (click)="openModal() "(click)="getdata(item._id)"  class="text-md font-medium text-green-600 hover:underline">ACCEPT</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div *ngIf="isModalOpen " class="fixed inset-0  flex bg-blue-500 items-center justify-center">
+            <div class="bg-black bg-opacity-50 absolute inset-0"></div>
+            <div class="bg-white rounded-lg p-6 relative shadow-lg" style="width: 400px;">
+              <div class="mb-4 shadow-lg mt-2">
+                <input type="text" class="rounded-lg px-4 py-2 w-full" formControlName="name" placeholder="Enter text" [ngClass]="{'shake-animation': isInputShaking}" (input)="onInputChange()" [value]="singledata.name">
+              </div>
+              <div class="mb-4 mt-2 flex items-center justify-between shadow-lg">
+                <label class="rounded-lg px-4 py-2 w-full  cursor-pointer" (mouseenter)="onFileInputHover($event)" (mouseleave)="onFileInputHover($event)">
+                  Choose File
+                  <input type="file" class="hidden" formControlName="image" #imageInput >
+                  <img [src]="singledata.image" alt="" >
+                </label>
+              </div>
+              <div class="flex justify-end">
+                <button class="bg-blue-500 text-white rounded-lg px-4 py-2 mr-2" (click)="closeModal()">cancel</button>
+                <button class="bg-blue-500 text-white rounded-lg px-4 py-2 mr-2" (click)="submitModal()">Submit</button>
+              </div>
+            </div>
+          </div>
+        
+</div>
+</div>

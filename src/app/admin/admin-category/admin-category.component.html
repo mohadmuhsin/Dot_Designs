@@ -1,0 +1,96 @@
+<!-- Button to Open Modal -->
+<app-admin-nav></app-admin-nav>
+<app-admin-sidebar></app-admin-sidebar>
+
+<!-- Modal -->
+
+
+
+<div class="p-2 sm:ml-64  z-40">
+  <div class="p-4">
+    <div class="center items-center">
+      <!-- captions -->
+      <div class="ml-5  mb-4">
+        <h2 class="text-1xl text-bold  lg:text-3xl md:text-2xl ">Designs</h2>
+      </div>
+      <!-- <div class="container">
+            <div class="bread-crumb flex flex-wrap items-center p-4 lg:p-0">
+              <a href="/" class="text-gray-600 hover:text-gray-800 transition-colors duration-300">
+                Home
+                <i class="fas fa-angle-right ml-2 mr-2" aria-hidden="true"></i>
+              </a>
+          
+              <a [routerLink]="'/category/' + product.category._id" class="text-gray-600 hover:text-gray-800 transition-colors duration-300">
+                {{ product.category.category }}
+                <i class="fas fa-angle-right ml-2 mr-2" aria-hidden="true"></i>
+              </a>
+          
+              <span class="text-gray-400">{{ product.name }}</span>
+            </div>
+          </div> -->
+
+      <!-- cards -->
+      <div *ngIf="filteredCategories" class="flex flex-wrap mx-5 lg:mx-4">
+       
+
+        <div *ngFor="let categoryItem of filteredCategories" class="card rounded-md bg-gray-900 mr-5 m">
+          <div class="card-img">
+            <img class="rounded-t-md w-full h-full object-cover animated-image" [src]="categoryItem.image" alt="product image" />
+          </div>
+          
+          <div class="card-footer px-3">
+            <span class="ttext-xl lg:text-xl font-normal text-white w-3/4 overflow-hidden whitespace-nowrap overflow-ellipsis">
+              {{ categoryItem.name }}
+            </span>
+            
+            <div [routerLink]="['/edit_category',categoryItem._id]" class="card-button">
+              <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+              </div>
+
+              <div (click)="dropCategory()" class="card-button ">
+                
+                <svg class="h-8 w-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="3 6 5 6 21 6" />  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />  <line x1="10" y1="11" x2="10" y2="17" />  <line x1="14" y1="11" x2="14" y2="17" /></svg>
+              </div>
+          </div>
+          
+        </div>
+        
+
+        <!-- Add more Category here -->
+        <a
+          routerLink="/add_category"
+          class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-1 mb-5 lg:mb-5"
+        >
+          <div
+            class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-1 mb-5 lg:mb-5 shadow-md border border-sm bg-white rounded-md shadow-md"
+            style="height: 350px; width: calc(100% - 15px)"
+          >
+            <div class="flex items-center justify-center h-full">
+              
+              <button class="rounded-lg p-4">Add More+</button>
+            </div>
+          </div>
+        </a>
+
+        <!-- verification -->
+        <a
+          routerLink="/category_approval"
+          class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-1 mb-5 lg:mb-5"
+        >
+          <div
+            class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-1 mb-5 lg:mb-5 shadow-md bg-[#FFD700] border border-sm rounded-md shadow-md"
+            style="height: 350px; width: calc(100% - 15px)"
+          >
+            <div class="flex items-center justify-center h-full">
+              
+              <button class="rounded-lg p-4 ">Pending Approvals</button>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
