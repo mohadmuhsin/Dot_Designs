@@ -30,10 +30,10 @@ export class DesignerLoginComponent implements OnInit {
       password: '',
     });
     this.shareData.setSharedData(this.Data);
-    const isLoggedIn = localStorage.getItem('designer');
-    if (isLoggedIn) {
-      this.router.navigate(['/designer']);
-    }
+    // const isLoggedIn = localStorage.getItem('designer');
+    // if (isLoggedIn) {
+    //   this.router.navigate(['/designer']);
+    // }
   }
   // email validation
   validateEmail(email: string): boolean {

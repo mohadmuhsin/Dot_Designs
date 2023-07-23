@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CloudinaryModule } from '@cloudinary/ng';
 import { CommonModule } from '@angular/common';
+import { StripeModule } from 'stripe-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,10 +27,19 @@ import { DesignsComponent } from './designer/designs/designs.component';
 import { DesignerMailVerificationComponent } from './designer/designer-mail-verification/designer-mail-verification.component';
 import { AuthServiceService } from './services/auth-service.service';
 import { SharedDataServiceService } from './designer/shared-data-service.service';
-import { AuthGuard } from './designer/auth.guard';
 import { SidebarComponent } from './designer/sidebar/sidebar.component';
 import { AddDesignsComponent } from './designer/add-designs/add-designs.component';
 import { StoreModule } from '@ngrx/store';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast'
+import { CalendarModule } from 'primeng/calendar';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { SliderModule } from 'primeng/slider';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+
+
 // import 'tailwindcss-dropdown';
 
 //state
@@ -50,6 +60,17 @@ import { EditCategoryComponent } from './admin/edit-category/edit-category.compo
 import { DesAddCategoryComponent } from './designer/des-add-category/des-add-category.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { CategoryApprovalComponent } from './admin/category-approval/category-approval.component';
+import { DesignDetailViewComponent } from './user/design-detail-view/design-detail-view.component';
+import { ConsultationFormComponent } from './user/consultation-form/consultation-form.component';
+import { BookingsComponent } from './user/bookings/bookings.component';
+import { BookingDetailsComponent } from './user/booking-details/booking-details.component';
+import { ConsultationRequestsComponent } from './designer/consultation-requests/consultation-requests.component';
+import { ConfirmBoxConfigModule, NgxAwesomePopupModule } from '@costlydeveloper/ngx-awesome-popup';
+import { DesignerProfileComponent } from './designer/designer-profile/designer-profile.component';
+import { UserGuard } from './user/user.guard';
+import { DesignerGuard } from './designer/designer.guard';
+import { AdminGuard } from './admin/admin.guard';
+import { DesignerListComponent } from './user/designer-list/designer-list.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +105,13 @@ import { CategoryApprovalComponent } from './admin/category-approval/category-ap
     DesAddCategoryComponent,
     ErrorPageComponent,
     CategoryApprovalComponent,
+    DesignDetailViewComponent,
+    ConsultationFormComponent,
+    BookingsComponent,
+    BookingDetailsComponent,
+    ConsultationRequestsComponent,
+    DesignerProfileComponent,
+    DesignerListComponent,
 
   ],
   imports: [
@@ -92,9 +120,20 @@ import { CategoryApprovalComponent } from './admin/category-approval/category-ap
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxAwesomePopupModule.forRoot(), 
+    ConfirmBoxConfigModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    CalendarModule,
+    ProgressBarModule,
+    TableModule,
+    StripeModule,
+    ButtonModule,
+    ToastModule,
+    SliderModule,
+    DropdownModule,
+    MultiSelectModule,
     CloudinaryModule,
     StoreModule.forRoot({categories:reducer}),
     EffectsModule.forRoot([CategoryEffects]),
@@ -103,12 +142,15 @@ import { CategoryApprovalComponent } from './admin/category-approval/category-ap
   providers: [
     AuthServiceService,
     SharedDataServiceService,
-    AuthGuard,
+    UserGuard,
+    DesignerGuard,
+    AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MyInterceptorInterceptor,
       multi: true,
     },
+    ToastrService
   ],
   bootstrap: [AppComponent],
 })

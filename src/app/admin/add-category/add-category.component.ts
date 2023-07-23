@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { Location } from '@angular/common';
+import { Emitters } from '../emitter/emitter';
+import { SharedDataServiceService } from 'src/app/designer/shared-data-service.service';
 
 @Component({
   selector: 'app-add-category',
@@ -18,13 +21,16 @@ export class AddCategoryComponent {
   cloudName = 'dgusa5uo6';
   uploadPreset = 'ml_default';
   imageUrl: string = '';
+  img!:string
 
   constructor(
     private router: Router,
     private store : Store,
+    private location: Location,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private service: AuthServiceService
+    private service: AuthServiceService,
+    private sharaedDataService:SharedDataServiceService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +38,9 @@ export class AddCategoryComponent {
       category: '',
       image: '',
     });
+     this.sharaedDataService.getSharedData().subscribe((res)=>{
+      Emitters.authEmitter.emit(true)
+     })
 
     this.initializeCloudinaryWidget();
   }
@@ -57,6 +66,8 @@ export class AddCategoryComponent {
       (error: any, result: any) => {
         if (!error && result && result.event === 'success') {
           this.imageUrl = result.info.secure_url;
+      this.img = this.imageUrl
+
           console.log('Image URL:', this.imageUrl);
         }
       }
@@ -76,12 +87,16 @@ export class AddCategoryComponent {
       this.toastr.error('Please upload an image', 'Warning!');
     } else {
       category.image = this.imageUrl;
+      console.log(this.img,"dklsffdk");
+      
 
       this.service.add_category(category).subscribe(
         (res: any) => {
           // this.store.dispatch(loadCategories())
-          this.router.navigate(['designer/add_category']);
+          location.reload();
+          this.router.navigate(['/add_category']);
           this.toastr.success('Category added', 'Success!');
+          
         },
         (err:any) => {
           const errorMessage = err.error.message;

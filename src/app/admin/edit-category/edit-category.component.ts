@@ -5,6 +5,10 @@ import { name } from '@cloudinary/url-gen/actions/namedTransformation';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { Emitters } from '../emitter/emitter';
+import { SharedDataServiceService } from 'src/app/designer/shared-data-service.service';
+import { loadCategories } from '../admin-state/action';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-category',
@@ -20,28 +24,40 @@ export class EditCategoryComponent {
   uploadPreset = 'ml_default';
   imageUrl: string = '';
   categoryId: any;
-  name!:string
-  image!:string
+  catName!:string
+  catImg!:string
   constructor(
-    private router: Router,
     private store: Store,
+    private router: Router,
+    private location:Location,
+    private route:ActivatedRoute,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private service: AuthServiceService
+    private service: AuthServiceService,
+    private sharedService:SharedDataServiceService
   ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-     name: this.name,
-     image: this.image
+     name: '',
+     image: ''
     });
+    
+
+    // 
+    this.sharedService.getSharedData().subscribe((res)=>{
+      Emitters.authEmitter.emit(true)
+    })
+
+
+
     this.initializeCloudinaryWidget();
 
     this.activeRoute.paramMap.subscribe((params) => {
       this.categoryId = params.get('id');
     });
-    this.getCategory();
+    this.getCategory()
   }
 
   initializeCloudinaryWidget() {
@@ -78,19 +94,25 @@ export class EditCategoryComponent {
   }
 
   submit() {
+   
     const category = this.form.getRawValue();
-
-    if (category.name === null) {
-      this.toastr.error("Category name is same", 'Warning!');
-    } else if (this.imageUrl === '') {
-      this.toastr.error('Please upload another image', 'Warning!');
-    } else {
-      category.image = this.imageUrl;
-
-      this.service.edit_category(category).subscribe(
+    console.log(category, 'ffd');
+    if (this.imageUrl.length !== 0) {
+      category.image = this.imageUrl; 
+    }
+    
+    
+    if (category.name.trim()=== '' ) {
+      this.toastr.error("Category name can not be blank", 'Warning!');
+    } else if (this.catName === category.name && this.catImg === category.image) {
+      this.toastr.error('No changes made', 'Warning!');
+    } else  if (category.images === '') {
+      this.toastr.error('Please upload an image', 'Warning!');
+    } else{
+      this.service.edit_category(category,this.categoryId).subscribe(
         (res: any) => {
-          // this.store.dispatch(loadCategories())
-          this.router.navigate(['designer/add_category']);
+          this.store.dispatch(loadCategories())
+          this.router.navigate(['/categoris'])
           this.toastr.success('Category added', 'Success!');
         },
         (err: any) => {
@@ -102,11 +124,12 @@ export class EditCategoryComponent {
   }
   getCategory() {
     this.service.getCategory(this.categoryId).subscribe((res: any) => {
-     this.name=res.name
-     this.image = res.image
-     this.form.setValue({
-      name: this.name,
-      image: this.image,
+      this.catName = res.name,
+       this.catImg = res.image
+     
+      this.form.patchValue({
+        name: res.name,
+        image:res.image,
     });
     },
     (err)=>{
@@ -115,4 +138,9 @@ export class EditCategoryComponent {
     });
   }
 
+  updateUser(updatedValues: any) {
+    this.form.patchValue(updatedValues);
+    console.log(updatedValues,"dklfkl");
+    
+  }
 }

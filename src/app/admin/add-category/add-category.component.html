@@ -18,12 +18,14 @@
             <label for="image"  class="block text-gray-700 font-bold  mb-2">Image</label>
 
             <input  id="image" formControlName="image" class="shadow-md rounded py-2 px-3 w-full" #imageInput placeholder="choose a file">
-        </div> 
+          <img *ngIf="img" [src]="img" class="w-20 h-20 mt-4 rounded sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 mx-2" alt="">
+
+          </div> 
           <div class="flex justify-end mx-auto px-5 py-5">
-            <a routerLink="/categoris" class="bg-[#0B1C39] hover:bg-blue-600 mr-4 text-white py-3 px-6 rounded ">
-              CANCEL
+            <a routerLink="/categoris" class="bg-[#0B1C39] hover:bg-[#FFD700] mr-4 text-white text-bold hover:text-[#0B1C39] py-3 px-6 rounded ">
+             BACK
             </a>
-            <button  type="submit" class="bg-[#0B1C39] hover:bg-blue-600 text-white py-3 px-6 rounded">
+            <button  type="submit" class="bg-[#0B1C39] hover:bg-[#FFD700] text-white hover:text-[#0B1C39] py-3 px-6 rounded">
               SUBMIT
             </button>
           </div>

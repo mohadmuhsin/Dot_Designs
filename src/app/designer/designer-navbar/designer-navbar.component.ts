@@ -31,7 +31,6 @@ export class DesignerNavbarComponent implements OnInit {
     ).subscribe((isAuthenticated:boolean) => {
       this.authenticate = isAuthenticated
       console.log(this.authenticate,"true");
-      
     });
   }
 

@@ -6,9 +6,9 @@ import { data } from 'autoprefixer';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Category } from '../../model/category_model';
-// import { loadCategories } from '../../state/action';
-// import { selectCategories } from '../..//state/selector';
-// import { CategoryState } from '../../state/state';
+import { loadCategories } from '../../admin/admin-state/action';
+import { selectCategories } from '../../admin/admin-state/selector';
+import { CategoryState } from '../../admin/admin-state/state';
 import { Emitters } from 'src/app/emitter/emitter';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
@@ -24,17 +24,24 @@ export class HomeComponent implements OnInit {
   username!: string;
   boo!: boolean;
   filteredCategories: Category[] = [];
+  category$: Observable<Category[]> | undefined;
+
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
     private router: Router,
-    // private store: Store<CategoryState>,
+    private store: Store<CategoryState>,
     private service: AuthServiceService
   ) {}
   categories$: Observable<Category[]> | undefined;
 
   ngOnInit(): void {
+    this.store.dispatch(loadCategories());
+    this.category$ = this.store.pipe(select(selectCategories));
+    this.category$?.subscribe((res: any) => {
+      this.filteredCategories = res
+    });
   
     this.service.user().subscribe(
       (res: any) => {

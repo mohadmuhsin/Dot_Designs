@@ -13,26 +13,6 @@ export class MyInterceptorInterceptor implements HttpInterceptor {
     let authReq = request;
     let url = request.url;
     console.log(url,"urllllllllllll");
-
-    // if (url.includes('/designer')) {
-    //   console.log("inside designer block");
-
-    //   const designerToken = localStorage.getItem('designerToken');
-    //   console.log(designerToken, "designer token");
-
-    //   authReq = request.clone({
-    //     setHeaders: {
-    //       Authorization: `Bearer ${designerToken}`,
-    //     },
-    //   });
-    // } else if (url.startsWith('/admin')) {
-    //   const adminToken = localStorage.getItem('admin');
-    //   authReq = request.clone({
-    //     setHeaders: {
-    //       Authorization: `Bearer ${adminToken}`,
-    //     },
-    //   });
-    // } else {
       const userToken = localStorage.getItem('token');
       authReq = request.clone({
         setHeaders: {
@@ -40,7 +20,6 @@ export class MyInterceptorInterceptor implements HttpInterceptor {
         },
       });
       
-    // }
 
     return next.handle(authReq);
   }

@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
     });
 
     // validation
-    const isLoggedIn = localStorage.getItem('token');
-    if (isLoggedIn) {
-      this.router.navigate(['/']);
-    }
+    // const isLoggedIn = localStorage.getItem('token');
+    // if (isLoggedIn) {
+    //   this.router.navigate(['/']);
+    // }
   }
 
 

@@ -1,66 +1,109 @@
 <app-admin-nav></app-admin-nav>
 <app-admin-sidebar></app-admin-sidebar>
-<div class="p-2 sm:ml-64  z-40">
-    <div class="p-4">
-        <div class="center items-center">
-            <div class="relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg">
-              <table class=" sm:w-full text-sm text-left text-gray-500">
-                <thead class="text-xs text-white uppercase bg-[#0B1C39]">
-                  <tr>
-                    <th scope="col" class="px-6 py-3 text-lg">
-                      Image
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-lg">
-                      Category
-                    </th>
-                    <th scope="col" class="px-3 py-3 text-lg">
-                      Action
-                    </th>
-                    <th scope="col" class="  text-lg">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody *ngIf="data">
-                  <tr *ngFor="let item of data; let i = index" class="bg-white border-b hover:bg-gray-50">
-                    <td class="w-32 p-4">
-                        <img [src]="item.image" class="w-28 h-28 rounded-lg object-contain sm:w-20 sm:h-20" alt="Apple Watch">
-                      </td>
-                    <td class="px-6 py-4 text-lg font-medium text-gray-900">
-                      {{item.name}}
-                    </td>
-                    <td class="px-3 py-4 text-md font-medium text-gray-900">
-                      <button  class=" font-medium text-red-600">RECJECT</button>
-                    </td>
-                    <td class="px-3 py-4">
-                      <button  (click)="openModal() "(click)="getdata(item._id)"  class="text-md font-medium text-green-600 hover:underline">ACCEPT</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+<div *ngIf="data.length === 0" class="sm:ml-64 z-40">
+  <div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-yellow-600">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+      class="h-16 w-16 text-white">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18M6 9h12M9 6h6" />
+    </svg>
+    <h2 class="text-3xl text-white font-semibold mt-6">No Pending Approvals</h2>
+    <p class="text-white opacity-75 text-lg mt-2">There are currently no pending approvals.</p>
+  </div>
+</div>
+
+  
+  
+
+<!-- if length >0 -->
+<div *ngIf="data.length > 0" class="p-2 sm:ml-64 z-40">
+  <div class="p-4">
+    <div class="center items-center">
+      <div class="relative w-full sm:w-3/4 overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500">
+          <thead class="text-xs text-white uppercase bg-[#0B1C39]">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-lg">
+                Image
+              </th>
+              <th scope="col" class="px-6 py-3 text-lg">
+                Category
+              </th>
+              <th scope="col" class="px-3 py-3 text-lg">
+                Action
+              </th>
+              <th scope="col" class="px-3 py-3 text-lg">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data; let i = index" class="bg-white border-b hover:bg-gray-50">
+              <td class="w-32 p-4">
+                <img [src]="item.image" class="w-28 h-28 rounded-lg object-contain sm:w-20 sm:h-20" alt="Apple Watch">
+              </td>
+              <td class="px-6 py-4 text-lg font-medium text-gray-900">
+                {{ item.name }}
+              </td>
+              <td class="px-3 py-4 text-md font-medium text-gray-900">
+                <button (click)="togglePopup()" (click)="rejectApproval(item._id)" class="font-medium text-red-600">REJECT</button>
+              </td>
+              <td class="px-3 py-4">
+                <button (click)="openModal()" (click)="getdata(item._id)" class="text-md font-medium text-green-600 hover:underline">ACCEPT</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
           <div *ngIf="isModalOpen " class="fixed inset-0  flex bg-blue-500 items-center justify-center">
             <div class="bg-black bg-opacity-50 absolute inset-0"></div>
             <div class="bg-white rounded-lg p-6 relative shadow-lg" style="width: 400px;">
+              <form [formGroup]="form" (submit)="approve()">
               <div class="mb-4 shadow-lg mt-2">
-                <input type="text" class="rounded-lg px-4 py-2 w-full" formControlName="name" placeholder="Enter text" [ngClass]="{'shake-animation': isInputShaking}" (input)="onInputChange()" [value]="singledata.name">
+                <input type="text" class="rounded-lg px-4 py-2 w-full" formControlName="name" placeholder="Enter text" [ngClass]="{'shake-animation': isInputShaking}" (input)="onInputChange()" [value]="name">
               </div>
-              <div class="mb-4 mt-2 flex items-center justify-between shadow-lg">
-                <label class="rounded-lg px-4 py-2 w-full  cursor-pointer" (mouseenter)="onFileInputHover($event)" (mouseleave)="onFileInputHover($event)">
-                  Choose File
-                  <input type="file" class="hidden" formControlName="image" #imageInput >
-                  <img [src]="singledata.image" alt="" >
+              <div class="mb-4 mt-2 flex rounded items-center justify-between shadow-lg">
+                <label class="rounded-lg px-4 py-4 w-full  cursor-pointer" (mouseenter)="onFileInputHover($event)" (mouseleave)="onFileInputHover($event)">
+                  <!-- Choose File -->
+                  <!-- <input  id="image" formControlName="image" class="shadow-md rounded py-2 px-3 w-full" #imageInput placeholder="choose a file"> -->
+                  <img [src]="image" alt="" class="rounded" >
                 </label>
               </div>
               <div class="flex justify-end">
-                <button class="bg-blue-500 text-white rounded-lg px-4 py-2 mr-2" (click)="closeModal()">cancel</button>
-                <button class="bg-blue-500 text-white rounded-lg px-4 py-2 mr-2" (click)="submitModal()">Submit</button>
+                <button class="bg-[#0B1C39] hover:bg-[#FFD700] text-white rounded-md px-4 py-2 mr-2" (click)="closeModal()">BACK</button>
+                <button class="bg-[#0B1C39] hover:bg-[#FFD700] text-white rounded-md px-4 py-2 mr-2" >SUBMIT</button>
               </div>
+            </form>
             </div>
           </div>
         
-</div>
-</div>
+
+
+
+
+<!-- Popup -->
+<main *ngIf="showPopup" class="popup">
+  <div class="relative px-4 flex items-center justify-center">
+    <div class="opacity-25 w-full h-full absolute z-10 inset-0"></div>
+    <div class="bg-white shadow shadow-md border border-sm rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+      <div class="md:flex items-center">
+        <div class="rounded-full border border-red-500 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+          <img src="assets/delete.png" alt="" class="w-12 h-12">
+        </div>
+        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+          <p class="font-bold text-red-700">Reject the Approval</p>
+          <p class="text-sm  text-gray-800 mt-1">You will lose this category by rejecting thing. This action cannot be undone.</p>
+        </div>
+      </div>
+      <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+        <button (click)="rejectCategoryApproval()" class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 bg-red-200 hover:bg-red-600 text-red-700 hover:text-white rounded font-semibold text-sm md:ml-2 md:order-2">Reject Category </button>
+        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 bg-gray-200 hover:bg-green-500 rounded hover:text-white font-semibold text-sm mt-4 md:mt-0 md:order-1" (click)="togglePopup()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</main>

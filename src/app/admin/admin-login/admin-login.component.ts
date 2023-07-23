@@ -24,10 +24,10 @@ export class AdminLoginComponent implements OnInit {
       username: '',
       password: '',
     });
-    const isLoggedIn = localStorage.getItem("admin_token")
-    if(isLoggedIn){
-      this.route.navigate(['/admin'])
-    }
+    // const isLoggedIn = localStorage.getItem("admin_token")
+    // if(isLoggedIn){
+    //   this.route.navigate(['/admin'])
+    // }
   }
 
   validateEmail(email: string): boolean {

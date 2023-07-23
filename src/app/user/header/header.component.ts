@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Emitters } from 'src/app/emitter/emitter';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
@@ -13,7 +14,9 @@ export class HeaderComponent implements OnInit {
   authenticated: boolean = false;
   isMenuVisibleOnNormalScreens = true;
 
-  constructor(private service: AuthServiceService) {}
+  constructor(private service: AuthServiceService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     Emitters.authEmitter.subscribe((auth: boolean) => {
@@ -35,6 +38,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.service.user_logout();
+    this.router.navigate([''])
     Emitters.authEmitter.emit(false);
   }
   isMenuOpen = false;

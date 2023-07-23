@@ -6,16 +6,16 @@
     <div class="p-4 mt-4">
       <form [formGroup]="form" (submit)="submit()" class="shadow-md rounded-b-md">
         <div class="bg-[#0B1C39] rounded-t-md p-4">
-          <h2 class="text-white text-lg font-bold bg-[#0B1C39] p-2">ADD CATEGORY</h2>
+          <h2 class="text-white text-lg font-bold bg-[#0B1C39] p-2">EDIT CATEGORY</h2>
         </div>
         <div class="mt-4 p-4">
             <div class="mb-4 px-5">
               <label for="name" class="block text-gray-700 font-bold mb-2">Category Name:</label>
-              <input type="text" id="name" formControlName="name" class="shadow-md rounded focus:outline-none py-2 px-3 w-full" placeholder="Enter category name" [value]="name">
+              <input type="text" id="name" formControlName="name" class="shadow-md rounded focus:outline-none py-2 px-3 w-full" placeholder="Enter category name" >
             </div>
             <div class="mb-4 px-5">
                 <label for="image" class="block text-gray-700 font-bold mb-2">Image</label>
-                <input id="image" formControlName="image" class="shadow-md rounded py-2 px-3 w-full" #imageInput placeholder="choose a file" [value]="image">
+                <input id="image" formControlName="image" class="shadow-md rounded py-2 px-3 w-full" #imageInput placeholder="choose a file" >
                 <img [src]="form.controls['image'].value" class="w-20 h-20 mt-4 rounded sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48" alt="">
               </div>
               

@@ -50,20 +50,20 @@
   </h4>
 </div>
 
-<!-- cards -->
-<div *ngIf="filteredCategories" class="flex flex-wrap  mx-5 lg:mx-4"> <!-- Remove justify-center for left alignment on small screens -->
-  <div *ngFor="let category of filteredCategories" [routerLink]="['/design_list',category._id]"  class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-1 mb-5 lg:mb-5 ">
-    <div class="relative rounded-lg shadow-md  d" style="height: 350px; width: calc(100% - 15px);">
-      <a >
-        <img class="rounded-lg w-full h-full object-cover" [src]="category.image" />
-        <div class="absolute rounded-b-lg bottom-0 left-0 w-full bg-opacity-75 bg-gray-900 p-3">
-          <span class="text-xl lg:text-xl font-normal text-white">{{category.name}}</span>
-        </div>
-      </a>
-    </div>
+<!-- cards starts -->
+<div *ngIf="filteredCategories" class="flex flex-wrap  mx-5 lg:mx-4"> 
+<div *ngFor="let categoryItem of filteredCategories" [routerLink]="['/design_list',categoryItem._id]" class="card rounded-md bg-gray-900 mr-3 mb-5">
+  <div class="card-img">
+    <img class="rounded-t-md w-full h-full object-cover animated-image" [src]="categoryItem.image" alt="product image" />
+  </div>
+  <div class="card-footer px-3">
+    <span class="ttext-xl lg:text-xl font-normal text-white w-3/4 overflow-hidden whitespace-nowrap overflow-ellipsis">
+      {{ categoryItem.name }}
+    </span>
   </div>
 </div>
 </div>
+<!-- card ends -->
 
 <!-- <div class="mx-2" > -->
   <section *ngIf="!Loader" class="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
@@ -72,12 +72,10 @@
         <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"></p>
         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-[#0B1C39] hover:text-white  bg-[FFD700] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-              Explore Designers
-                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                </svg>
+              Connect with Designers
+                
             </a>
-            <a href="#" class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white  border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
+            <a href="#" class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white  border border-white  hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
               Explore Designs
             </a>  
         </div>

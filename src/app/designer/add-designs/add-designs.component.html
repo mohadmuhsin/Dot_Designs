@@ -37,17 +37,17 @@
           </div>
      
           <div class="mb-4 px-5">
-            <input id="image" formControlName="image" class="shadow-md rounded py-4 px-3 focus:outline-blue-900 w-full" #imageInput type="file" placeholder="Choose a file" multiple>
+            <input id="image" formControlName="images" class="shadow-md rounded py-4 px-3 focus:outline-blue-900 w-full" #imageInput type="file" placeholder="Choose a file" multiple>
           </div>
           
          
         </div>
 
         <div class="flex justify-end mx-auto px-5 py-5">
-          <button routerLink="/designer/designs" class="bg-[#0B1C39] hover:bg-[#FFD700] transition duration-200 mr-4 text-white hover:text-[#000000] py-3 px-6 rounded">
+          <a (click)="back()" class="bg-[#0B1C39] hover:bg-[#FFD700] transition duration-200 mr-4 text-white hover:text-[#000000] py-3 px-6 rounded">
             BACK
-          </button>
-          <button class="bg-[#0B1C39] hover:bg-[#FFD700] text-white hover:text-[#000000] transition duration-200 py-3  px-6 rounded">
+          </a>
+          <button type="submit" class="bg-[#0B1C39] hover:bg-[#FFD700] text-white hover:text-[#000000] transition duration-200 py-3  px-6 rounded">
            SUBMIT
           </button>
         </div>

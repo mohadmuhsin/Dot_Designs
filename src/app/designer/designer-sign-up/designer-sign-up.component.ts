@@ -26,10 +26,10 @@ export class DesignerSignUpComponent implements OnInit {
       password: '',
     });
 
-    const isLoggedIn = localStorage.getItem('designer');
-    if (isLoggedIn) {
-      this.router.navigate(['/designer']);
-    }
+    // const isLoggedIn = localStorage.getItem('designer');
+    // if (isLoggedIn) {
+    //   this.router.navigate(['/designer']);
+    // }
   }
 
   validateEmail(email: string): boolean {

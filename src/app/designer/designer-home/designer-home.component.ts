@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Emitters } from '../emitter/emitter';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { SharedDataServiceService } from '../shared-data-service.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-designer-home',
@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class DesignerHomeComponent implements OnInit {
   Data: string = '';
+  authenticated$: any
+  authenticate: any
   isSidebarHidden!: Observable<boolean>;
   constructor(
     private service: AuthServiceService,
@@ -22,9 +24,11 @@ export class DesignerHomeComponent implements OnInit {
 
   ngOnInit(): void {
     
+    
+
+    
     this.service.designer().subscribe(
       (res: any) => {
-        
         Emitters.authEmitter.emit(true);
       },
       (err) => {
@@ -33,10 +37,18 @@ export class DesignerHomeComponent implements OnInit {
     );
 
 
+
     const isLoggedIn = localStorage.getItem('designer');
     if (!isLoggedIn) {
       this.router.navigate(['/designer_login']);
     }
+
+
   
   }
+
+    // setSharedData(auth:boolean): void {
+    // this.shareData.setSharedData(auth);
+  // }
 }
+  

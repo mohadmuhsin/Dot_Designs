@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { data } from 'autoprefixer';
 
@@ -36,6 +36,74 @@ export class AuthServiceService {
   user_logout() {
     return this.http.post(`${this.url}/logout`, {}, { withCredentials: true });
   }
+  retrive_DesignsbyId(id:any){
+    return this.http.get(`${this.url}/retrive_DesignbyId/${id}`,{withCredentials:true})
+  }
+
+  getDesignDetails(id:any){
+    return this.http.get(`${this.url}/getDesignDetails/${id}`,{withCredentials:true})
+  }
+
+  bookingRequest(formData: any, designerId: any, designId: any) {
+    const data = {formData,designerId,designId}
+    return this.http.post(`${this.url}/bookingRequest`,data,{withCredentials:true})
+  }
+
+  // stipe payment
+  makePayment(stripeToken: any, amount: number,id:any) {
+    const data = { stripeToken, amount,id };
+    return this.http.post(`${this.url}/feePayment`, data, { withCredentials: true })
+  }
+
+  rejectBooking(id:any){
+    return this.http.post(`${this.url}/rejectBooking/${id}`,{withCredentials:true})
+  }
+
+
+  rejectPayment(id:any){
+    return this.http.post(`${this.url}/rejectPayment/${id}`,{withCredentials:true})
+  }
+
+  cancellConsultation(id: any) {
+    const bookings={
+      id:id
+    }
+    return this.http.post(`${this.url}/cancellConsultation`,bookings,{withCredentials:true})
+  }
+
+  cancellProject(id: any) {
+    const bookings={
+      id:id
+    }
+    return this.http.post(`${this.url}/cancellProject`,bookings,{withCredentials:true})
+  }
+
+  get_last_booking(){
+    return this.http.get(`${this.url}/get_last_booking`,{withCredentials:true})
+  }
+
+  getbookings(){
+    return this.http.get(`${this.url}/getbookings`,{withCredentials:true})
+  }
+  
+  booking_detail(id:any){
+    return this.http.get(`${this.url}/booking_detail/${id}`,{withCredentials:true})
+  }
+
+  // user List
+  getDesignersList() {
+    return this.http.get(`${this.url}/getDesignersList`,{withCredentials:true})
+  }
+
+  connectDesigner(id: any) {
+    console.log(id, "ldskf");
+    const data =id
+    
+    return this.http.post(`${this.url}/connectDesigner/${id}`,{withCredentials:true})
+  }
+
+
+
 
   // designers
   designer_signup(data: any) {
@@ -69,6 +137,20 @@ export class AuthServiceService {
       { withCredentials: true }
     );
   }
+  
+
+  getProfileData(token: any) {
+    const params = new HttpParams()
+      .set('token', token)
+    
+   return this.http.get(`${this.url}/designer/getProfileData`,{params, withCredentials:true})
+  }
+
+  updateProfile(data: any, token: string | null) {
+    const Data = { data, token }
+    return this.http.post(`${this.url}/designer/updateProfile`,Data,{withCredentials:true})
+  }
+
   // guard
   is_Authenticated(): boolean {
     return this.isAuthenticated;
@@ -83,8 +165,8 @@ export class AuthServiceService {
 
   //
 
-  retrive_Designs(id: any) {
-    return this.http.get(`${this.url}/designer/retrive_Designs/${id}`, {
+  retrive_Designs(id: any,token:any) {
+    return this.http.get(`${this.url}/designer/retrive_Designs/${id}/${token}`, {
       withCredentials: true,
     });
   }
@@ -93,10 +175,33 @@ export class AuthServiceService {
   //   return this.http.get(`${this.url}/designer/retrive_categories`,{withCredentials:true})
   // }
 
-  add_design(data: any) {
-    return this.http.post(`${this.url}/designer/add_design`, data, {
+  add_design(data: any, token: any) {
+    const Data = {
+     data,token
+   } 
+    return this.http.post(`${this.url}/designer/add_design`, Data, {
       withCredentials: true,
     });
+  }
+
+  updateDesign(data: any, token: any,designId:any) {
+    const Data = {
+     data,token,designId
+   } 
+    return this.http.put(`${this.url}/designer/updateDesign`,Data,{withCredentials:true})
+  }
+
+  deleteDesignImage(link: any, designId: any) {
+    
+   const params = new HttpParams()
+    .set('link', link)
+    .set('designId', designId);
+  return this.http.delete(`${this.url}/designer/deleteDesignImage`, {params, withCredentials: true });
+}
+
+
+  deleteDesign(id: any){
+  return this.http.delete(`${this.url}/designer/deleteDesign/${id}`,{withCredentials:true})
   }
 
   getDesignData(id: any) {
@@ -109,6 +214,61 @@ export class AuthServiceService {
     const Data ={data,token}
     return this.http.post(`${this.url}/designer/sendRequest`,Data,{withCredentials:true})
   }
+
+
+  getRequests(token:any){
+    return this.http.get(`${this.url}/designer/getRequests/${token}`,{withCredentials:true})
+  }
+
+  acceptRequest(id:any){
+    const bookings={
+      id:id
+    }
+    return this.http.post(`${this.url}/designer/acceptRequest`,bookings,{withCredentials:true})
+  }
+
+  rejectRequest(id:any){
+    const bookings={
+      id:id
+    }
+    return this.http.post(`${this.url}/designer/rejectRequest`,bookings,{withCredentials:true})
+  }
+
+  consultationDone(id:any){
+    const bookings={
+      id:id
+    }
+    return this.http.post(`${this.url}/designer/consultationDone`,bookings,{withCredentials:true})
+  }
+
+  StartProject(id:any){
+    const bookings={
+      id:id
+    }
+    return this.http.post(`${this.url}/designer/StartProject`,bookings,{withCredentials:true})
+  }
+
+  projectCompleted(id: any) {
+    console.log('dklkdf');
+    
+    const bookings={
+      id:id
+    }
+    console.log(id);
+    
+    return this.http.post(`${this.url}/designer/projectCompleted`,bookings,{withCredentials:true})
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   // admin
   admin_login(data: any) {
@@ -134,11 +294,17 @@ export class AuthServiceService {
       withCredentials: true,
     });
   }
-  edit_category(data: any) {
-    return this.http.post(`${this.url}/admin/edit_category`, data, {
+  edit_category(data: any,categoryId:any) {
+   const Data = {data,categoryId}
+    return this.http.post(`${this.url}/admin/edit_category`, Data, {
       withCredentials: true,
     });
   }
+
+  dropCategory(id: any) {
+    return this.http.delete(`${this.url}/admin/dropCategory/${id}`, { withCredentials: true });
+  }
+  
 
   getCategory(id: any) {
     return this.http.get(`${this.url}/admin/get_category/${id}`, {
@@ -149,5 +315,13 @@ export class AuthServiceService {
 
   getPendingRequest(){
     return this.http.get(`${this.url}/admin/getPendingRequest`,{withCredentials:true})
+  }
+
+
+  approveCategory(data:{}){
+    return this.http.patch(`${this.url}/admin/approveCategory`,data,{withCredentials:true})
+  }
+  rejectCategoryApproval(id:any){
+    return this.http.delete(`${this.url}/admin/rejectCategoryApproval/${id}`,{withCredentials:true})
   }
 }

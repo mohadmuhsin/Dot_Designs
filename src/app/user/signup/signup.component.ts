@@ -29,10 +29,7 @@ export class SignupComponent implements OnInit {
       mobileNumber: '',
       password: '',
     });
-    const isLoggedIn = localStorage.getItem('token');
-    if (isLoggedIn) {
-      this.router.navigate(['/']);
-    }
+  
   }
 
 

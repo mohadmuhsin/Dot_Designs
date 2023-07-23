@@ -33,4 +33,5 @@ export class DesignCategoryComponent {
       this.filteredCategories = categories;
     });
   }
+  
 }

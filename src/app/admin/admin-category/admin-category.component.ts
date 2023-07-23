@@ -10,6 +10,7 @@ import { loadCategories } from '../admin-state/action';
 import { selectCategories } from '../admin-state/selector';
 import { CategoryState } from '../admin-state/state';
 import { Emitters } from '../emitter/emitter';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin-category',
@@ -20,6 +21,7 @@ export class AdminCategoryComponent implements OnInit {
   categoryId!: any;
   categories: Category[] = [];
   filteredCategories: Category[] = [];
+  pendingApproval:any
   form!: FormGroup;
 
   // cloudinary
@@ -36,7 +38,9 @@ export class AdminCategoryComponent implements OnInit {
     private service: AuthServiceService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private location: Location
+
   ) {}
 
   category$: Observable<Category[]> | undefined;
@@ -52,9 +56,30 @@ export class AdminCategoryComponent implements OnInit {
       category: '',
       image: '',
     });
+//     
+
+
+    
+    this.service.getPendingRequest().subscribe((res: any) => {
+      this.pendingApproval = res.length
+      console.log(this.pendingApproval,"here it is");
+    },(err:any)=>{
+      console.log(err.error.message);
+      
+    })
 
     
   }
-  dropCategory(){}
+  dropCategory(id: any){
+    const _id = id
+    this.service.dropCategory(id).subscribe(()=>{
+      location.reload();
+      this.toastr.success("Category Deleted","Success")
+    },(err: { error: { message: any; }; })=>{
+      const errorMessage = err.error.message
+      this.toastr.warning(errorMessage,"Warning!")
+    })
+
+  }
     
 }

@@ -1,17 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,ts}'],
+  content: ['./src/**/*.html'], // Update this array with the appropriate content sources
   theme: {
-    extend: {
-      fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-      }
-    },
+    extend: {},
   },
-  plugins: [
-    require('tailwindcss-font-inter')(),
-  ],
+  plugins: [],
 };
-
-
-

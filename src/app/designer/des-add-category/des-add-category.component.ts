@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { loadCategories } from 'src/app/admin/admin-state/action';
@@ -19,13 +19,14 @@ export class DesAddCategoryComponent {
   cloudName = 'dgusa5uo6';
   uploadPreset = 'ml_default';
   imageUrl: string = '';
-
+  image!:string
   constructor(
     private router: Router,
     private store : Store,
+    private route:ActivatedRoute,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private service: AuthServiceService
+    private service: AuthServiceService,
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +59,7 @@ export class DesAddCategoryComponent {
       (error: any, result: any) => {
         if (!error && result && result.event === 'success') {
           this.imageUrl = result.info.secure_url;
+          this.image = this.imageUrl
           console.log('Image URL:', this.imageUrl);
         }
       }
@@ -81,7 +83,12 @@ export class DesAddCategoryComponent {
       this.service.sendRequest(category,token).subscribe(
         (res: any) => {
           this.store.dispatch(loadCategories())
-          this.router.navigate(['designer/add_category']);
+          const currentRoute = this.route.snapshot.routeConfig?.path;
+        this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate([currentRoute]);
+        });
           this.toastr.success('Request send for approval', 'Success!');
         },
         (err: { error: { message: any; }; }) => {

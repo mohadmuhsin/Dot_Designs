@@ -29,7 +29,7 @@ export class AdminNavComponent  implements OnInit{
         console.log(this.admin_authenticated,"admin");
         
       })
-      
+      this.sharedDataService.setSharedData(this.admin_authenticated)
     }
   toggleNavbarDropdown() {
     this.isNavbarDropdownOpen = !this.isNavbarDropdownOpen;

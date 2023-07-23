@@ -1,0 +1,55 @@
+<app-header></app-header>
+<div class="flex">
+    <div class="w-3/5">
+      <!-- Slider images -->
+      <img *ngFor="let image of design.images" [src]="image" alt="Design Image" (click)="showImage(image)" />
+    </div>
+    
+    <div class="w-2/5 px-4 py-8">
+      <h2 class="text-2xl font-bold mb-4">{{ design.name }}</h2>
+      
+      <div class="border-b-2 mb-4"></div>
+      <div class="flex mb-2">
+        <div class="font-bold text-1xl mr-2">Specifications</div>
+      </div>
+      <span class="text-1xl font-semibold mb-5"></span>
+      <div class="flex mb-2">
+        <div class="font-semibold  text-sm mr-2">MaterialType:</div>
+        <div class="text-sm">{{ design.materialType }}</div>
+      </div>
+      
+      <div class="flex mb-2">
+        <div class="font-semibold text-sm mr-2">FinishType:</div>
+        <div class="text-sm">{{ design.finishType }}</div>
+      </div>
+      
+      <div class="flex mb-2">
+        <div class="font-semibold text-sm mr-2">Description:</div>
+        <div class="text-sm">{{ design.description }}</div>
+      </div>
+      
+      <div class="border-b-2 mb-4"></div>
+      
+      <div class="flex items-center">
+        <div class="mr-4">
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="mr-4">
+          <i class="fa fa-share"></i>
+        </div>
+      </div>
+      <div class="card-button flex flex-row">
+        <img src="assets/favorite.png" class="svg-icon  mt-4 " alt="Edit Icon" style="width: 40px; height: 40px; margin-right: 8px;">
+        <img src="assets/favorite.png" class="svg-icon  mt-4 " alt="Edit Icon" style="width: 40px; height: 40px; margin-right: 8px;">
+        
+        <button [routerLink]="['/consultation_register',design.designer,design._id]" class="px-4 py-2 bg-[#0B1C39] hover:bg-[#FFD700] text-white hover:text-[#000000] rounded-sm mt-4">GET A QUOTE</button>
+      </div>
+      
+    </div>
+    
+    <div class="flex flex-wrap mt-4">
+      <!-- Other design images -->
+      <img *ngFor="let image of design.otherImages" [src]="image" alt="Design Image" class="w-16 h-auto mr-4 mb-4 cursor-pointer" (click)="showImage(image)" />
+    </div>
+  </div>
+  

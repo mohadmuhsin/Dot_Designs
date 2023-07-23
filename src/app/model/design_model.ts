@@ -1,9 +1,10 @@
 export interface Design {
   _id: any;
   name: string;
-  materilaType: string;
+  materialType: string;
   finishType: string;
   category: any;
-  image: string;
+  images: string[];
+  designer:string
   description: string;
 }

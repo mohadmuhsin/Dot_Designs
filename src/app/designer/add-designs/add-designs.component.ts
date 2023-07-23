@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 import { loadCategories } from 'src/app/admin/admin-state/action';
 import { selectCategories } from 'src/app/admin/admin-state/selector';
 import { CategoryState } from 'src/app/admin/admin-state/state';
+import { Location } from '@angular/common';
+import { image } from '@cloudinary/url-gen/qualifiers/source';
+
 
 declare const cloudinary: any;
 
@@ -26,7 +29,8 @@ export class AddDesignsComponent implements OnInit {
   // cloudinary
   cloudName = 'dgusa5uo6';
   uploadPreset = 'ml_default';
-  imageUrl: string = '';
+  imageUrl: string[] = [];
+
 
   // category dropdow
   showDropdown: boolean = false;
@@ -39,10 +43,12 @@ export class AddDesignsComponent implements OnInit {
   
   constructor(
     private router: Router,
+    private location: Location,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private store: Store<CategoryState>,
     private service: AuthServiceService,
+    private route:ActivatedRoute
   ) {}
 
   categories$: Observable<Category[]> | undefined;
@@ -53,17 +59,23 @@ export class AddDesignsComponent implements OnInit {
       materialType: '',
       finishType: '',
       category: '',
-      image: [[]],
+      images: [[]],
       description:''
     });
 
     this.store.dispatch(loadCategories());
-    this.categories$ = this.store.pipe(select(selectCategories));
-
+    this.categories$ = this.store.pipe(select(selectCategories))
     this.categories$.subscribe((categories) => {
-      console.log(categories);
       this.filteredCategories = categories;
     });
+    const token = localStorage.getItem('designer')
+    this.service.getProfileData(token).subscribe((res:any) => {
+      const { status } = res.profile
+      if (!status) {
+        this.router.navigate(['/designerProfile'])
+      }
+      
+    })
 
     // retriving categoyry
     this.initializeCloudinaryWidget();
@@ -86,23 +98,34 @@ export class AddDesignsComponent implements OnInit {
             upload: 'Upload',
           },
         },
+        // Add the debug option to enable logging
+        debug: true,
+        // Add this function to handle the upload success event
+        onSuccess: (result: any) => {
+          const files = result.info.files;
+        }, 
       },
-       (error: any, results: any[]) => { // Handle multiple results
-      if (!error && results && results.length > 0) {
-        this.handleImageUpload(results); // Pass the results to the handler
-      }
+      (error: any, result: any) => {
+        console.log('Cloudinary error:', error); 
+        console.log('Cloudinary result:',  result); 
+        const files = result.info.files;
+        
+        this.handleImageUpload(files);
       }
     );
-
+  
     this.imageInput.nativeElement.addEventListener('click', () => {
       widget.open();
     });
   }
+  
+  
+
 
   submit() {
     const designs = this.form.getRawValue();
-    designs.category =this.categoryId
-
+    designs.category = this.categoryId;
+    designs.images = this.imageUrl; 
 
     if (
       designs.designName.trim() === '' ||
@@ -111,14 +134,21 @@ export class AddDesignsComponent implements OnInit {
       designs.category.trim() === ''
     ) {
       this.toastr.error("Fields can't be empty", 'Warning!');
-    } else if (this.imageUrl === '') {
+    } else if (this.imageUrl.length === 0) {
       this.toastr.error('Please upload an image', 'Warning!');
     } else {
-      designs.image = this.imageUrl;
-
-      this.service.add_design(designs).subscribe(
+      const token = localStorage.getItem("designer") 
+      console.log(token);
+      
+      this.service.add_design(designs,token).subscribe(
         (res: any) => {
-          this.router.navigate(['designer/add_designs']);
+          // this.router.navigate(['/add_designs']);
+       const currentRoute = this.route.snapshot.routeConfig?.path;
+        this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate([currentRoute]);
+        });
           this.toastr.success('Design added', 'Success!');
         },
         (err) => {
@@ -128,14 +158,31 @@ export class AddDesignsComponent implements OnInit {
       );
     }
   }
-  handleImageUpload(results: any[]) {
-    const images = results.map((result: any) => result.info.secure_url);
-    this.form.get('image')?.setValue(images);
+  
+  handleImageUpload(files: any[]) {
+    console.log('Filessss:', files); 
+
+    const images = files.map((file: any) => file.uploadInfo.secure_url);
+    console.log('Images:', images);
+  
+    this.imageUrl = [...this.imageUrl, ...images]; 
+    console.log('Image URLs:', this.imageUrl); 
   }
+  
+  
+  
+  
+  
+  
+  
   
   selectCategory(category: Category) {
     this.selectedCategory = category;
     this.categoryId = category._id;
     this.showDropdown = false;
+  }
+  back(){
+    this.location.back();
+
   }
 }
