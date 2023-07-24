@@ -71,6 +71,8 @@ import { UserGuard } from './user/user.guard';
 import { DesignerGuard } from './designer/designer.guard';
 import { AdminGuard } from './admin/admin.guard';
 import { DesignerListComponent } from './user/designer-list/designer-list.component';
+import { DesignersProfileComponent } from './user/designers-profile/designers-profile.component';
+import { DesignerBasedDesignsComponent } from './user/designer-based-designs/designer-based-designs.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,8 @@ import { DesignerListComponent } from './user/designer-list/designer-list.compon
     ConsultationRequestsComponent,
     DesignerProfileComponent,
     DesignerListComponent,
+    DesignersProfileComponent,
+    DesignerBasedDesignsComponent,
 
   ],
   imports: [

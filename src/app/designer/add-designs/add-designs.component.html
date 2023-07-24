@@ -37,7 +37,9 @@
           </div>
      
           <div class="mb-4 px-5">
-            <input id="image" formControlName="images" class="shadow-md rounded py-4 px-3 focus:outline-blue-900 w-full" #imageInput type="file" placeholder="Choose a file" multiple>
+            <input id="image" formControlName="images" class="shadow-md rounded py-4 px-3 focus:outline-blue-900 w-full" #imageInput  placeholder="Choose a file" multiple>
+          <img *ngIf="imageUrl.length>0" [src]="imageUrl"
+            class="w-20 h-20 mt-4 rounded sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 mx-2" alt="">
           </div>
           
          

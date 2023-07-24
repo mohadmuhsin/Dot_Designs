@@ -32,6 +32,8 @@ import { UserGuard } from './user/user.guard';
 import { DesignerGuard } from './designer/designer.guard';
 import { AdminGuard } from './admin/admin.guard';
 import { DesignerListComponent } from './user/designer-list/designer-list.component';
+import { DesignersProfileComponent } from './user/designers-profile/designers-profile.component';
+import { DesignerBasedDesignsComponent } from './user/designer-based-designs/designer-based-designs.component';
 const routes: Routes = [
   // user
   { path: '', component: HomeComponent },
@@ -43,7 +45,9 @@ const routes: Routes = [
   {path:'consultation_register/:id/:designId',canActivate:[UserGuard],component:ConsultationFormComponent},
   {path:'bookings',canActivate:[UserGuard],component:BookingsComponent},
   { path: 'booking_details/:id', canActivate: [UserGuard], component: BookingDetailsComponent },
-  {path:'desiger_list',canActivate:[UserGuard],component:DesignerListComponent},
+  { path: 'designer_list', canActivate: [UserGuard], component: DesignerListComponent },
+  { path: 'designer_profile/:id', canActivate: [UserGuard], component: DesignersProfileComponent },
+  {path:'designer_designs/:catId/:designerId',canActivate:[UserGuard],component:DesignerBasedDesignsComponent},
 
   // designer
   { path: 'designer',canActivate: [DesignerGuard],component: DesignerHomeComponent},

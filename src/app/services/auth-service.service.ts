@@ -98,9 +98,20 @@ export class AuthServiceService {
   connectDesigner(id: any) {
     console.log(id, "ldskf");
     const data =id
-    
     return this.http.post(`${this.url}/connectDesigner/${id}`,{withCredentials:true})
   }
+
+  getDesignerData(id:any) {
+    return this.http.get(`${this.url}/getDesignerData/${id}`,{withCredentials:true})
+  }
+
+  getDesignerDesign(catId: any, designerId: any){
+    const params = new HttpParams()
+    .set('catId', catId)
+    .set('designerId', designerId)
+  return this.http.get(`${this.url}/getDesignerDesign`,{params,withCredentials:true})
+  }
+  
 
 
 
@@ -125,11 +136,13 @@ export class AuthServiceService {
       withCredentials: true,
     });
   }
+
   designer() {
     return this.http.get(`${this.url}/designer/designer`, {
       withCredentials: true,
     });
   }
+
   designer_logout() {
     return this.http.post(
       `${this.url}/designer/logout`,
@@ -138,11 +151,9 @@ export class AuthServiceService {
     );
   }
   
-
   getProfileData(token: any) {
     const params = new HttpParams()
       .set('token', token)
-    
    return this.http.get(`${this.url}/designer/getProfileData`,{params, withCredentials:true})
   }
 

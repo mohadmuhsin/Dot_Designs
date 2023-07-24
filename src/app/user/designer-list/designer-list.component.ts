@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { connect } from 'rxjs';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 })
 export class DesignerListComponent implements OnInit{
   designers: any;
-  
+  connected :boolean =false
 
   constructor(private service: AuthServiceService,
     private toastr: ToastrService,
@@ -19,12 +20,27 @@ export class DesignerListComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.service.getDesignersList().subscribe((res: any) => {
-      console.log(res);
-      this.designers = res
-       this.designers.forEach((designer: any) => {
-     console.log(designer.profile.profilePhoto);
-        });
+      this.service.getDesignersList().subscribe((res: any) => {
+        console.log(res);
+        this.designers = res;
+this.designers.forEach((designer: any) => {
+  console.log(designer.profile.profilePhoto);
+
+  // Access the connectionRequest array for each designer and log its request property
+  designer.connectionRequest.forEach((connectionRequest: any) => {
+    
+    this.connected = connectionRequest.request
+    console.log(this.connected);
+    
+  });
+});
+          
+               //  this.connected = designer.connectionRequest[0].request
+        //  console.log(this.connected);
+         
+     ;
+      
+      
     }, (err: { error: { message: any; }; }) => {
       const errorMessage = err.error.message
       this.toastr.error(errorMessage,"Warning",{
@@ -38,7 +54,8 @@ export class DesignerListComponent implements OnInit{
     console.log("lkfsf");
     
     this.service.connectDesigner(id).subscribe((res: any) => {
-      console.log();
+      const Message = res.message
+      this.toastr.success(Message,"Success")
       
     }, (err: { error: { message: any; }; }) => {
       const errorMessage = err.error.message
@@ -48,3 +65,16 @@ export class DesignerListComponent implements OnInit{
     })
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
