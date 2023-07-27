@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { data } from 'autoprefixer';
 
@@ -231,6 +231,12 @@ export class AuthServiceService {
     return this.http.get(`${this.url}/designer/getRequests/${token}`,{withCredentials:true})
   }
 
+  getConsultationCount(token: any) {
+    const params = new HttpParams()
+      .set("token", token)
+    return this.http.get(`${this.url}/designer/getConsultationCount`,{params,withCredentials:true})
+  }
+
   acceptRequest(id:any){
     const bookings={
       id:id
@@ -270,6 +276,27 @@ export class AuthServiceService {
     return this.http.post(`${this.url}/designer/projectCompleted`,bookings,{withCredentials:true})
   }
 
+  getConnectionRequests(id: any) {
+    
+    const params = new HttpParams()
+      .set("id", id)
+    console.log(params);
+    
+    return this.http.get(`${this.url}/designer/getConnectionRequests/${id}`,{params,withCredentials:true})
+  }
+
+  RejectConnection(id: any,designer:any) {
+    const data = {id,designer}
+    return this.http.post(`${this.url}/designer/RejectConnection`,data,{withCredentials:true})
+  }
+
+
+  acceptConnectionRequest(id: any, designer: any) {
+    const data = {id,designer}
+    return this.http.post(`${this.url}/designer/acceptConnectionRequest`, data, { withCredentials: true})
+  }
+
+
 
 
 
@@ -288,8 +315,10 @@ export class AuthServiceService {
     });
   }
 
-  loadAdmin() {
-    return this.http.get(`${this.url}/admin/load_admin`, {
+  loadAdmin(token: any) {
+    const params = new HttpParams()
+    .set("token",token)
+    return this.http.get(`${this.url}/admin/load_admin`, {params,
       withCredentials: true,
     });
   }

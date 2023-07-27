@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Emitters } from 'src/app/emitter/emitter';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class DesignerBasedDesignsComponent implements OnInit {
 }
   getDesignData(catId:any,designerId:any) {
     this.service.getDesignerDesign(catId, designerId).subscribe((design: any) => {
+      Emitters.authEmitter.emit(true)
       this.designs = design
     }, (err: any) => {
       console.log(err);

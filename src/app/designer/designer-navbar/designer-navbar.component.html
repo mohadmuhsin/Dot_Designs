@@ -15,7 +15,7 @@
     </button>
 
     <!-- Navbar Dropdown (Visible on larger screens) -->
-    <div class="hidden md:block mr-4">
+    <div class=" md:block mr-4">
       <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100   md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ml-auto justify-end">
         <!-- Home Link -->
         <li *ngIf="authenticate">
@@ -43,7 +43,7 @@
   <a routerLink="/consultation_requests" class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] border border-gray-300 hover:text-white bg-white shadow px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Bookings</a>
   <a (click)="toggleNavbarDropdown()" routerLink="/design_categories" class="border border-gray-300 flex bg-white shadow items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Designs</a>
   <a routerLink="/designer"  class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Dashboard</a>
-  <a class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Offers</a>
+  <!-- <a class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Offers</a> -->
   <a class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Messages</a>
   <button *ngIf="!authenticate" routerLink="/designer_login" class="block px-4 py-2 text-sm bg-white border border-gray-300 px-5 text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-4">
     Login/Signup

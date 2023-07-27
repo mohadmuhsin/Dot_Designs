@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './user/home/home.component';
 import { DesignerHomeComponent } from './designer/designer-home/designer-home.component';
 import { LoginComponent } from './user/login/login.component';
@@ -8,7 +9,6 @@ import { MailVerificationComponent } from './user/mail-verification/mail-verific
 import { DesignerLoginComponent } from './designer/designer-login/designer-login.component';
 import { DesignerSignUpComponent } from './designer/designer-sign-up/designer-sign-up.component';
 import { DesignerMailVerificationComponent } from './designer/designer-mail-verification/designer-mail-verification.component';
-// import { DesignsComponent } from './designer/designs/designs.component';
 import { DesignsComponent } from './designer/designs/designs.component';
 import { AddDesignsComponent } from './designer/add-designs/add-designs.component';
 import { DesignCategoryComponent } from './designer/design-category/design-category.component';
@@ -28,12 +28,18 @@ import { BookingsComponent } from './user/bookings/bookings.component';
 import { BookingDetailsComponent } from './user/booking-details/booking-details.component';
 import { ConsultationRequestsComponent } from './designer/consultation-requests/consultation-requests.component';
 import { DesignerProfileComponent } from './designer/designer-profile/designer-profile.component';
-import { UserGuard } from './user/user.guard';
-import { DesignerGuard } from './designer/designer.guard';
-import { AdminGuard } from './admin/admin.guard';
 import { DesignerListComponent } from './user/designer-list/designer-list.component';
 import { DesignersProfileComponent } from './user/designers-profile/designers-profile.component';
 import { DesignerBasedDesignsComponent } from './user/designer-based-designs/designer-based-designs.component';
+import { ChatComponent } from './user/chat/chat.component';
+
+// Guards
+import { UserGuard } from './user/user.guard';
+import { DesignerGuard } from './designer/designer.guard';
+import { AdminGuard } from './admin/admin.guard';
+import { ChatingComponent } from './designer/chating/chating.component';
+import { ConnectionRequestsComponent } from './designer/connection-requests/connection-requests.component';
+
 const routes: Routes = [
   // user
   { path: '', component: HomeComponent },
@@ -41,26 +47,31 @@ const routes: Routes = [
   { path: 'signup',canActivate:[UserGuard] , component: SignupComponent ,},
   { path: 'user/:id/verify/:token', component: MailVerificationComponent },
   { path: 'design_list/:id', component: DesignListComponent },
-  { path:'design_detailView/:id', component:DesignDetailViewComponent},
-  {path:'consultation_register/:id/:designId',canActivate:[UserGuard],component:ConsultationFormComponent},
-  {path:'bookings',canActivate:[UserGuard],component:BookingsComponent},
+  { path: 'design_detailView/:id', component:DesignDetailViewComponent},
+  { path: 'consultation_register/:id/:designId',canActivate:[UserGuard],component:ConsultationFormComponent},
+  { path: 'bookings',canActivate:[UserGuard],component:BookingsComponent},
   { path: 'booking_details/:id', canActivate: [UserGuard], component: BookingDetailsComponent },
   { path: 'designer_list', canActivate: [UserGuard], component: DesignerListComponent },
   { path: 'designer_profile/:id', canActivate: [UserGuard], component: DesignersProfileComponent },
-  {path:'designer_designs/:catId/:designerId',canActivate:[UserGuard],component:DesignerBasedDesignsComponent},
+  { path: 'designer_designs/:catId/:designerId', canActivate: [UserGuard], component: DesignerBasedDesignsComponent },
+  { path: 'chating/:id',canActivate: [UserGuard], component: ChatComponent },
+  
 
   // designer
   { path: 'designer',canActivate: [DesignerGuard],component: DesignerHomeComponent},
   { path: 'designs/:id',canActivate: [DesignerGuard],component: DesignsComponent},
   { path: 'add_designs',canActivate: [DesignerGuard], component: AddDesignsComponent },
   { path: 'design_categories',canActivate: [DesignerGuard], component: DesignCategoryComponent },
-  { path:'addCategory',canActivate: [DesignerGuard],component:DesAddCategoryComponent},
+  { path: 'addCategory',canActivate: [DesignerGuard],component:DesAddCategoryComponent},
   { path: 'edit_design/:id',canActivate: [DesignerGuard], component: EditDesignComponent },
-  {path:'consultation_requests',canActivate: [DesignerGuard],component:ConsultationRequestsComponent},
-  {path: 'designer_login', canActivate: [DesignerGuard],component: DesignerLoginComponent},
-  {path: 'designer_signup',canActivate: [DesignerGuard],component: DesignerSignUpComponent},
-  { path: 'designer/:id/verify/:token',canActivate: [DesignerGuard], component: DesignerMailVerificationComponent },
-  {path:"designerProfile",canActivate: [DesignerGuard],component:DesignerProfileComponent},
+  { path: 'consultation_requests',canActivate: [DesignerGuard],component:ConsultationRequestsComponent},
+  { path: 'designer_login', canActivate: [DesignerGuard],component: DesignerLoginComponent},
+  { path: 'designer_signup',canActivate: [DesignerGuard],component: DesignerSignUpComponent},
+  { path: 'designer/:id/verify/:token', component: DesignerMailVerificationComponent },
+  { path: "designerProfile", canActivate: [DesignerGuard], component: DesignerProfileComponent },
+  { path: 'designerChating', canActivate: [DesignerGuard], component: ChatingComponent },
+  { path: 'connection_requests', canActivate: [DesignerGuard], component: ConnectionRequestsComponent},
+  
 
 
 
@@ -69,9 +80,9 @@ const routes: Routes = [
   { path: 'admin_login',canActivate: [AdminGuard], component: AdminLoginComponent },
   { path: 'categoris',canActivate: [AdminGuard], component: AdminCategoryComponent },
   { path: 'add_category',canActivate: [AdminGuard], component: AddCategoryComponent },
-  {path:'edit_category/:id',canActivate: [AdminGuard],component:EditCategoryComponent},
-  {path:'category_approval',canActivate: [AdminGuard],component:CategoryApprovalComponent},
-  {path:'**',component:ErrorPageComponent},
+  { path: 'edit_category/:id',canActivate: [AdminGuard], component:EditCategoryComponent},
+  { path: 'category_approval',canActivate: [AdminGuard], component:CategoryApprovalComponent},
+  { path: '**', component: ErrorPageComponent},
 ];
 
 @NgModule({

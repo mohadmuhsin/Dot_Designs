@@ -32,21 +32,8 @@ export class LoginComponent implements OnInit {
       password: '',
     });
 
-    // validation
-    // const isLoggedIn = localStorage.getItem('token');
-    // if (isLoggedIn) {
-    //   this.router.navigate(['/']);
-    // }
+    
   }
-
-
-
-
-
-
-
-
-
 
 
   ngAfterViewInit() {
@@ -95,7 +82,6 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     const user = this.form.getRawValue();
-
     if (user.username.trim() === '' || user.password.trim() === '') {
       console.log('login');
       this.toastr.error('Fields cannot be empty', 'Warning!');
@@ -105,7 +91,7 @@ export class LoginComponent implements OnInit {
       this.service.login(user).subscribe(
         (res: any) => {
           localStorage.setItem('token', res.token);
-          // localStorage.setItem('id', res.data);
+          localStorage.setItem('userId', res.userid);
           Emitters.authEmitter.emit(true);
           this.router.navigate(['/']);
         },

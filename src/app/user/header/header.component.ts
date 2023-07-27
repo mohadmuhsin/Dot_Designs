@@ -1,5 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { opacity } from '@cloudinary/url-gen/actions/adjust';
+import { list } from 'postcss';
 import { Emitters } from 'src/app/emitter/emitter';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
@@ -13,6 +15,8 @@ export class HeaderComponent implements OnInit {
   isDropdownNavbarOpen = false;
   authenticated: boolean = false;
   isMenuVisibleOnNormalScreens = true;
+  showMenuItems: boolean = false;
+  showmenu :boolean = false
 
   constructor(private service: AuthServiceService,
     private router: Router
@@ -22,21 +26,26 @@ export class HeaderComponent implements OnInit {
     Emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });
+  this.showMenuItems = window.innerWidth > 768;
   }
 
   toggleNavbarDropdown() {
     this.isNavbarDropdownOpen = !this.isNavbarDropdownOpen;
   }
 
-  toggleDropdownNavbar() {
-    this.isDropdownNavbarOpen = !this.isDropdownNavbarOpen;
+    toggleMenuItems() {
+    this.showMenuItems = !this.showMenuItems;
   }
+  // toggleDropdownNavbar() {
+  //   this.isDropdownNavbarOpen = !this.isDropdownNavbarOpen;
+  // }
   isAuthenticated(): boolean {
     return this.authenticated;
   }
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId')
     this.service.user_logout();
     this.router.navigate([''])
     Emitters.authEmitter.emit(false);
@@ -51,16 +60,14 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen =!this.isDropdownOpen
   }
 
-  @HostListener('window:resize', ['$event'])
-  onWindowResize(event: Event) {
-    const screenWidth = (event.target as Window).innerWidth;
-    if (screenWidth > 768) { // Adjust the screen width threshold as needed
-      this.isNavbarDropdownOpen = false;
-    }
-    if(screenWidth<768){
-      this.isMenuOpen = false
-      this.isDropdownOpen = false
-    }
+  menu() {
+    this.showmenu = !this.showmenu 
+   
   }
+
+
+
+
+
 
 }

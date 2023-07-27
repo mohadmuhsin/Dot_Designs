@@ -2,16 +2,13 @@
     height: 350px;
 } */
 
-
 .card {
     width: 283.8px;
     height: 280px;
-    /* padding: .8em; */
-    /* background: #ffff; */
+ 
     position: relative;
     overflow: visible;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    /* border-radius: 5px,0px,5px,0px; */
 }
 
 .card-img {
@@ -22,10 +19,7 @@
     transition: .3s ease;
 }
 
-/*    
-   .card-info {
-    padding-top: 10%;
-   } */
+
 
 svg {
     width: 20px;
@@ -38,8 +32,8 @@ svg {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding-top: 10px; */
-    /* border-top: 1px solid #ddd; */
+    padding-bottom: 5px;
+
 }
 
 /*Text*/
@@ -77,5 +71,12 @@ svg {
     font-family: 'Lato', sans-serif;
 }
 
-
+@media (min-width: 768px) {
+    .card {
+        width: 183.8px;
+        height: 180px;
+        position: relative;
+        overflow: visible;
+    }
+}
 /* card end */

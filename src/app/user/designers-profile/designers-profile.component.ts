@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/category_model';
 import { loadCategories } from '../state/action';
 import { selectCategories } from '../state/selector';
+import { Emitters } from 'src/app/emitter/emitter';
 
 @Component({
   selector: 'app-designers-profile',
@@ -32,6 +33,7 @@ export class DesignersProfileComponent implements OnInit {
     this.categories$ = this.store.pipe(select(selectCategories))
 
     this.categories$.subscribe((category) => {
+      Emitters.authEmitter.emit(true)
       this.categroyList = category
     })
 

@@ -105,29 +105,30 @@ export class DesignerProfileComponent implements OnInit{
     console.log(profile, 'submit');
     profile.image = this.imageUrl
     console.log(this.imageUrl);
-
+ const number =  profile.mobileNumber.toString()
     if (
-profile.entity_name 
-=== undefined|| profile.address 
-=== undefined|| profile.district 
-=== undefined|| profile.state 
-=== undefined|| profile.mobileNumber
-=== undefined|| profile.website 
-=== undefined|| profile.bio 
-=== undefined|| profile.image 
-=== undefined|| profile.email === undefined
+profile.entity_name.trim() 
+=== ''|| profile.address.trim()
+=== ''|| profile.district.trim() 
+=== ''|| profile.state.trim() 
+=== ''|| number.trim()
+=== ''|| number.length<10 ||
+      profile.website.trim() 
+=== ''|| profile.bio.trim() 
+=== ''|| profile.image.trim() 
+=== ''|| profile.email.trim() === ''
     ) {
       this.toastr.warning(`Fields can't be empty`)
     } else if (
-profile.entity_name.trim() === this.CompanyName
-&& profile.address.trim() === this.Address
-&& profile.district.trim() === this.District
-&& profile.state.trim() === this.State
-&& profile.mobileNumber.trim() === this.MobileNumber
-&& profile.website.trim() === this.Website
-&& profile.bio.trim() === this.Bio
-&& profile.image.trim() === this.Image
-&& profile.email.trim() === this.Email
+      profile.entity_name.trim() === this.CompanyName&&
+      profile.address.trim() === this.Address &&
+      profile.district.trim() === this.District &&
+      profile.state.trim() === this.State &&
+      profile.mobileNumber.trim() === this.MobileNumber &&
+      profile.website.trim() === this.Website &&
+      profile.bio.trim() === this.Bio &&
+      profile.image.trim() === this.Image &&
+      profile.email.trim() === this.Email
     ) {
     this.toastr.warning("No changes are made","Warning!")
     }
@@ -136,25 +137,16 @@ profile.entity_name.trim() === this.CompanyName
       this.service.updateProfile(profile, token).subscribe((res: any) => {
         const Message = res.message
         console.log(Message);
-        const currentRoute = this.router.url;
-        console.log(currentRoute);
+       
         
         
-        if (currentRoute !== '/add_designs' && currentRoute !== '/addCategory') {
           const currentRoute = this.route.snapshot.routeConfig?.path;
         this.router
         .navigateByUrl('/', { skipLocationChange: true })
         .then(() => {
           this.router.navigate([currentRoute]);
         });
-        } else if (currentRoute === '/add_designs') {
-          this.router.navigate(['/add_designs'])
-        } else if (currentRoute === '/addCategory') {
-          this.router.navigate(['/addCategory'])
-        }
-
-        
-
+   
         this.toastr.success(Message||"Profile updated Successfully","Success")
       }, (err: { error: { message: any; }; }) => {
         const errorMessage = err.error.message

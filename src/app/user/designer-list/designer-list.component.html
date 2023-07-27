@@ -1,33 +1,32 @@
 <app-header></app-header>
 
 <div *ngIf="designers" class="py-8 px-5  w-full flex flex-wrap">
- <div *ngFor="let designer of designers"  class="card mb-5 mr-5 border rounded-lg shadow shadow-md">
-                        <div class="card-info">
-                            <div class="card-avatar">
-                        <img [src]="designer?.profile?.profilePhoto" alt="" class=" rounded-full" />
+    <div *ngFor="let designer of designers"  class="card mb-5 mr-5 border rounded-lg shadow shadow-md">
+        <div class="card-info">
+            <div class="card-avatar">
+            <img [src]="designer?.profile?.profilePhoto" alt="" class=" rounded-full" />
 
-                            </div>
-                            <div class="card-title">{{designer.entity_name}}</div>
-                            <div class="card-subtitle">{{designer.email}}</div>
-                        </div>
-                        <ul class="card-social">
-                            <li [routerLink]="['/designer_profile',designer._id]"  class="card-social__item">
-                                <button class="button2  py-1 px-2 text-xs  text-black hover:bg-[#0B1C39] hover:text-white rounded  border border-[#0B1C39]"> Profile</button>
-                            </li>
-                            <li *ngIf="!connected" (click)="connectWithDesigner(designer._id)" class="card-social__item">
-                                <button class="py-1 px-2 text-xs text-white bg-[#0B1C39] hover:bg-[#FFD700] hover:text-white rounded border  border-[#0B1C39] hover:border-[#FFD700] " > Connect</button>
-                            </li>
-                            <li  *ngIf="connected"  class="card-social__item">
-                                <button
-                                    class="py-1 px-2 text-xs text-white bg-[#0B1C39] hover:bg-[#FFD700] hover:text-white rounded border  border-[#0B1C39] hover:border-[#FFD700] ">
-                                    Message
-                                </button>
-                            </li>
-                           
-                        </ul>
-                        
-                    </div>
+            </div>
+            <div class="card-title">{{designer.entity_name}}</div>
+            <div class="card-subtitle">{{designer.email}}</div>
         </div>
+        <ul class="card-social">
+            <li [routerLink]="['/designer_profile',designer._id]"  class="card-social__item">
+                <button class="button2  py-1 px-2 text-xs  text-black hover:bg-[#0B1C39] hover:text-white rounded  border border-[#0B1C39]"> Profile</button>
+            </li>
+            <li *ngIf="connected == accepted" (click)="connectWithDesigner(designer._id)" class="card-social__item">
+                <button class="py-1 px-2 text-xs text-white bg-[#0B1C39] hover:bg-[#FFD700] hover:text-white rounded border  border-[#0B1C39] hover:border-[#FFD700]">
+                     Connect
+                </button>
+            </li>
+            <li  *ngIf="connected == accepted"  class="card-social__item">
+                <button [routerLink]="['/chating',designer._id]" class="py-1 px-2 text-xs text-white bg-[#0B1C39] hover:bg-[#FFD700] hover:text-white rounded border  border-[#0B1C39] hover:border-[#FFD700] ">
+                    Message
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
 
 
         

@@ -7,7 +7,7 @@
     <div class="center items-center">
       <!-- captions -->
       <div class="ml-5 mt-10 mb-4">
-        <h2 class="text-1xl text-bold  lg:text-3xl md:text-2xl ">Designs</h2>
+        <h2 class="text-1xl font-medium  lg:text-3xl md:text-2xl ">Designs</h2>
       </div>
       <!-- <div class="container">
             <div class="bread-crumb flex flex-wrap items-center p-4 lg:p-0">
@@ -53,7 +53,7 @@
         </div> -->
 
 
-        <div *ngFor="let designItem of design" [routerLink]="[designItem._id]" class="card rounded-md bg-gray-900 mr-3 pb-3 mb-3">
+        <div *ngFor="let designItem of design"  class="card rounded-md bg-gray-900 mr-3 pb-3 mb-3">
           <div class="card-img">
             <img class="rounded-t-md w-full h-full object-cover animated-image" [src]="designItem.images[0]" alt="product image" />
           </div>

@@ -110,6 +110,12 @@ export class BookingsComponent  implements OnInit {
      this.confirmation = false
     this.service.makePayment(token,amount,id).subscribe((res:any)=>{
       this.showPopup()
+        const currentRoute = this.route.snapshot.routeConfig?.path;
+        this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate([currentRoute]);
+        });
       console.log(res);
       this.booking = res.booking
       console.log(this.booking);

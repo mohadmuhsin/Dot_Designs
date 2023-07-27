@@ -17,8 +17,9 @@ export class AdminHomeComponent implements OnInit {
     private toastr: ToastrService,
     ){}
 
-    ngOnInit(): void {
-        this.service.loadAdmin().subscribe((res)=>{
+  ngOnInit(): void {
+      const token = localStorage.getItem('admin_token')
+      this.service.loadAdmin(token).subscribe((res) => {
           Emitters.authEmitter.emit(true)
         },(err)=>{
           Emitters.authEmitter.emit(false)

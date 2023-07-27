@@ -7,8 +7,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CloudinaryModule } from '@cloudinary/ng';
 import { CommonModule } from '@angular/common';
 import { StripeModule } from 'stripe-angular';
-
+import { StoreModule } from '@ngrx/store';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast'
+import { CalendarModule } from 'primeng/calendar';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { SliderModule } from 'primeng/slider';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SocketIoModule,SocketIoConfig } from 'ngx-socket-io';
 import { AppRoutingModule } from './app-routing.module';
+
+//state
+import {  reducer } from './admin/admin-state/reducer'; 
+import {CategoryEffects}from './admin/admin-state/effects';
+import { EffectsModule } from '@ngrx/effects';
+
+// components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './user/home/home.component';
 import { LoginComponent } from './user/login/login.component';
@@ -25,30 +41,11 @@ import { DesignerNavbarComponent } from './designer/designer-navbar/designer-nav
 import { DesignerFooterComponent } from './designer/designer-footer/designer-footer.component';
 import { DesignsComponent } from './designer/designs/designs.component';
 import { DesignerMailVerificationComponent } from './designer/designer-mail-verification/designer-mail-verification.component';
-import { AuthServiceService } from './services/auth-service.service';
-import { SharedDataServiceService } from './designer/shared-data-service.service';
 import { SidebarComponent } from './designer/sidebar/sidebar.component';
 import { AddDesignsComponent } from './designer/add-designs/add-designs.component';
-import { StoreModule } from '@ngrx/store';
-import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast'
-import { CalendarModule } from 'primeng/calendar';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { TableModule } from 'primeng/table';
-import { SliderModule } from 'primeng/slider';
-import { DropdownModule } from 'primeng/dropdown';
-import { MultiSelectModule } from 'primeng/multiselect';
-
-
-// import 'tailwindcss-dropdown';
-
-//state
-import {  reducer } from './admin/admin-state/reducer'; 
-import {CategoryEffects}from './admin/admin-state/effects';
-import { EffectsModule } from '@ngrx/effects';
 import { DesignCategoryComponent } from './designer/design-category/design-category.component';
 import { AddCategoryComponent } from './admin/add-category/add-category.component';
-  import { DesignListComponent } from './user/design-list/design-list.component';
+import { DesignListComponent } from './user/design-list/design-list.component';
 import { EditDesignComponent } from './designer/edit-design/edit-design.component';
 import { UserDetailsComponent } from './admin/user-details/user-details.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
@@ -67,17 +64,40 @@ import { BookingDetailsComponent } from './user/booking-details/booking-details.
 import { ConsultationRequestsComponent } from './designer/consultation-requests/consultation-requests.component';
 import { ConfirmBoxConfigModule, NgxAwesomePopupModule } from '@costlydeveloper/ngx-awesome-popup';
 import { DesignerProfileComponent } from './designer/designer-profile/designer-profile.component';
-import { UserGuard } from './user/user.guard';
-import { DesignerGuard } from './designer/designer.guard';
-import { AdminGuard } from './admin/admin.guard';
 import { DesignerListComponent } from './user/designer-list/designer-list.component';
 import { DesignersProfileComponent } from './user/designers-profile/designers-profile.component';
 import { DesignerBasedDesignsComponent } from './user/designer-based-designs/designer-based-designs.component';
+import { ChatComponent } from './user/chat/chat.component';
+import { ChatingComponent } from './designer/chating/chating.component';
+
+
+// environment
+import { environment } from 'src/environments/environment';
+
+// Guards
+import { UserGuard } from './user/user.guard';
+import { DesignerGuard } from './designer/designer.guard';
+import { AdminGuard } from './admin/admin.guard';
+
+// services
+import { SocketService } from './services/socket.service';
+import { AuthServiceService } from './services/auth-service.service';
+import { SharedDataServiceService } from './designer/shared-data-service.service';
+import { ConnectionRequestsComponent } from './designer/connection-requests/connection-requests.component';
+
+const config: SocketIoConfig = {
+	url: environment.socketUrl, 
+	options: {
+	}
+}
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ChatComponent,
     LoginComponent,
     SignupComponent,
     NavbarComponent,
@@ -89,7 +109,6 @@ import { DesignerBasedDesignsComponent } from './user/designer-based-designs/des
     DesignerSignUpComponent,
     DesignerNavbarComponent,
     DesignerFooterComponent,
-    DesignerMailVerificationComponent,
     SidebarComponent,
     AddDesignsComponent,
     DesignsComponent,
@@ -111,24 +130,24 @@ import { DesignerBasedDesignsComponent } from './user/designer-based-designs/des
     ConsultationFormComponent,
     BookingsComponent,
     BookingDetailsComponent,
-    ConsultationRequestsComponent,
     DesignerProfileComponent,
     DesignerListComponent,
     DesignersProfileComponent,
     DesignerBasedDesignsComponent,
+    ConsultationRequestsComponent,
+    DesignerMailVerificationComponent,
+    ChatingComponent,
+    ConnectionRequestsComponent,
+
 
   ],
   imports: [
+    FormsModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    NgxAwesomePopupModule.forRoot(), 
-    ConfirmBoxConfigModule.forRoot(),
-    FormsModule,
     ReactiveFormsModule,
-    CommonModule,
     CalendarModule,
     ProgressBarModule,
     TableModule,
@@ -139,16 +158,24 @@ import { DesignerBasedDesignsComponent } from './user/designer-based-designs/des
     DropdownModule,
     MultiSelectModule,
     CloudinaryModule,
-    StoreModule.forRoot({categories:reducer}),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    SocketIoModule.forRoot(config), 
+    NgxAwesomePopupModule.forRoot(), 
+    ConfirmBoxConfigModule.forRoot(),
     EffectsModule.forRoot([CategoryEffects]),
+    StoreModule.forRoot({categories:reducer}),
     
   ],
   providers: [
-    AuthServiceService,
-    SharedDataServiceService,
+    // Guards
     UserGuard,
     DesignerGuard,
     AdminGuard,
+    // ṣervices
+    SocketService,
+    AuthServiceService,
+    SharedDataServiceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MyInterceptorInterceptor,

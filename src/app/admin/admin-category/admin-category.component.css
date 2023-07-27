@@ -20,12 +20,11 @@
   .card {
     width: 283.8px;
     height: 280px;
-    /* padding: .8em; */
-     /* background: #ffff; */
+   
     position: relative;
     overflow: visible;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    /* border-radius: 5px,0px,5px,0px; */
+  
    }
    
    .card-img {
@@ -47,21 +46,13 @@
    
    .card-footer {
     width: 100%;
-    /* font-weight: 800; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 6px;
-    /* border-top: 1px solid #ddd; */
+ 
    }
    
-   /*Text*/
-   /* .text-title {
-    font-weight: 900;
-    font-size: .5em;
-    line-height: 1.5;
-    padding-left: 5px;
-   } */
+   
    
    
    

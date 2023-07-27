@@ -51,7 +51,8 @@ export class DesignerLoginComponent implements OnInit {
       this.toastr.error('Email should be valid',"Warning!")
     }else{
       this.service.designer_login(designer).subscribe((res:any)=>{
-        localStorage.setItem("designer",res.token)
+        localStorage.setItem("designer", res.token)
+        localStorage.setItem('designerId',res.data._id)
         this.setSharedData()
         Emitters.authEmitter.emit(true)
         this.router.navigate(['/designer'])
