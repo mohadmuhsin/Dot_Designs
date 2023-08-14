@@ -1,0 +1,78 @@
+<app-header></app-header>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+<div class="container mx-auto px-4  py-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-bold">List of Bookings</h2>
+      <div class="relative">
+        <i class="absolute  inset-y-0  px-2 py-2 flex items-center fas fa-search text-gray-600"></i>
+        <input type="text" class="input pl-10 pr-3 py-2 w-64 border rounded-md text-sm text-gray-800" [(ngModel)]="searchQuery" (input)="search()" placeholder="Search..." />
+      </div>
+    </div>
+  
+    <div class="overflow-x-auto shadow overflow-hidden border-b border-gray-200  rounded-md">
+      <table class="min-w-full divide-y  divide-gray-200">
+        <thead class=" bg-[#0B1C39] ">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              SL.NO
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              DESIGNSER
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              CONTACT DETAILS
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              Date
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+                PROJECT DETAILS
+              </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              Status
+            </th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngIf="booking" class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let item of booking  | paginate: {
+                        itemsPerPage: tableSize,
+                        currentPage:page,
+                        totalItems:count
+                    } let i = index">
+            <td class="px-6 py-4 whitespace-nowrap">{{i+1}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{item.designerId.entity_name}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{item.designerId.mobileNumber}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{item.date|date:"dd-mm-yyy"}}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{item.designId.name}}</td>
+            <td class="px-6 py-4 whitespace-nowrap overflow-hidden whitespace-nowrap overflow-ellipsis">{{item.status}}</td>
+            <td [routerLink]="['/booking_details',item._id]"  class="px-6 py-4 whitespace-nowrap text-center">
+              <button class="text-red-500 hover:text-red-600" title="Info">
+                <img src="assets/info_1629161.png" alt="" class="w-6 h-6">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="noResultsFound" class="text-center  mt-4 text-md font-mediumflex justify-center items-center">
+        No results found for '{{ searchQuery }}'
+      </div>
+    </div>
+  
+    <div class="flex items-center justify-between mt-4">
+    <pagination-controls 
+    previousLabel="Prev" 
+    nextLabel="Next" 
+    (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+    </div>
+  </div>
+<app-footer></app-footer>
+  <script src="https://js.stripe.com/v3"></script>

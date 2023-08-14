@@ -1,8 +1,0 @@
-/* Add the following CSS to your existing styles */
-.ellipsis {
-    max-width: 150px;
-    /* Adjust the value to your desired max width */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}

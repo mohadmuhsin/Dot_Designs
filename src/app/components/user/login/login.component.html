@@ -1,0 +1,127 @@
+
+<!-- nav start -->
+<nav class="p-5 bg-[#0B1C39] shadow text-white md:flex md:items-center md:justify-between">
+  <div class="flex justify-between items-center">
+    <span routerLink="/" class="text-2x cursor-pointer">
+      <img src="assets/dot-designs-low-resolution-logo-color-on-transparent-background.png" class="h-8" alt="">
+    </span>
+    <span class="cursor-pointer md:hidden block" >
+      <img src="assets/menu-button-of-three-horizontal-lines.png" name="menu" alt="" class="h-6">
+      <img  src="assets/close.png" class="h-6" name="close" alt="">
+    </span>
+  </div>
+</nav>
+<!-- nav end -->
+
+<!-- login start -->
+<section class="flex items-center justify-center min-h-screen bg-white">
+  <div class="container mx-auto max-w-screen-xl">
+    <div class="flex flex-col md:flex-row  justify-center">
+      <div class="w-full md:w-1/2 bg-cover bg-center bg-no-repeat   md:rounded-l-lg md:rounded-tr-none md:bg-none" style="background-image: url('assets/Vinyl\ Decal\ \ welcome\ We\'re\ Glad\ You\'re\ -\ Etsy.png');"></div>
+      <div class="w-full md:w-1/2 bg-[#0B1C39] rounded sm:rounded-tr-lg sm:rounded-l-none sm:rounded-br-lg shadow-lg p-12   font-inter">
+        <div class="w-full bg-white  p-12 rounded">
+          <!-- <h5 class="font-normal mb-4 font-medium" style="letter-spacing: 1px;">Sign into your account</h5> -->
+          <form [formGroup]="form" (submit)="login()">
+            <div class="mb-6">
+              <label class="block mb-2 text-md " for="form2Example17">Enter your username</label>
+              <input type="email" id="form2Example17" formControlName="email" class="form-input w-full h-12 rounded border pl-3 focus:outline-none focus:border-blue-500 shadow-sm" placeholder="Username" />
+            </div>
+            <div class="mb-6">
+              <label class="block mb-2 text-md" for="form2Example27">Enter your Password</label>
+              <input type="password" id="form2Example27" formControlName="password" class="form-input w-full h-12 rounded border pl-3 focus:outline-none focus:border-blue-500 shadow-sm" placeholder="Password" />
+            </div>
+            <div class="mb-8">
+              <button class="w-full bg-[#0B1C39]  hover:bg-[#FFD700] hover:text-[#0B1C39] text-white font-medium py-3 px-4 rounded" type="submit">LOGIN</button>
+            </div>
+          </form>
+            <div class="flex justify-center items-center text-sm my-2">
+              <p>Or login with</p>
+            </div>
+            
+            <div class="mb-4">
+              <button 
+                class="w-full bg-[#0B1C39] hover:bg-[FFD700] hover:text-[#0B1C39] text-white font-medium py-3 px-4 rounded flex flex-row items-center">
+                <asl-google-signin-button name="Google Signup" type="icon" size="medium"></asl-google-signin-button>
+                <span class="mx-auto">Login With Google</span>
+              </button>
+            </div>
+
+
+            
+
+
+            <div class="text-center">
+              <a class=" text-sm text-gray-500 cursor-pointer"  onclick="my_modal_3.showModal()"  >Forgot password?</a>
+              <p class="mt-2 text-md text-gray-700">Don't have an account? <a routerLink="/signup" class="text-blue-500 shadow-sm">Register here</a></p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://accounts.google.com/gsi/client?hl=fr" async defer></script>
+<div class="g_id_signin"
+  data-locale="fr">
+</div>
+
+
+
+<!--  modal using ID -->
+<dialog id="my_modal_3" class="modal">
+  <form method="dialog" class="modal-box">
+    <main id="content" role="main" class="w-full max-w-md mx-auto ">
+      <div class=" bg-white  ">
+        <button class="btn btn-sm btn-circle  btn-ghost absolute right-2 top-2">✕</button>
+        <div class="p-4 sm:p-4">
+          <div class="text-center">
+            <h1 class="block text-2xl  font-bold text-gray-800 px-4 py-2 dark:text-white">Forgot password?</h1>
+            <p class="btn mt-2 text-xs  rounded text-gray-600">
+              Remember your password?
+              <button class="text-[#0B1C39] decoration-2 hover:underline text-sm font-medium" routerLink="/login">
+                Login here
+              </button>
+            </p>
+          </div>
+    
+          <div class="mt-5">
+            <form [formGroup]="ForgotPassword">
+              <div class="grid gap-y-4">
+                <div>
+                  <label for="email" class="block text-sm font-normal ml-1 mb-2 text-gray-400">Email address</label>
+                  <div class="relative mb-5">
+                    <input type="email" id="email" formControlName="email"
+                      class="py-3 px-4 block w-full border-2 border-gray-100 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-md"
+                      required aria-describedby="email-error">
+                  </div>
+
+                  <div *ngIf="verifiedMail" class="relative mb-5">
+                    <label for="email" class="block text-sm font-normal ml-1 mb-2 text-gray-400">New password</label>
+                    <input type="password" id="password" formControlName="password"
+                      class="py-3 px-4 block w-full border-2 border-gray-100 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-md"
+                      required aria-describedby="email-error">
+                  </div>
+
+                  <div *ngIf="verifiedMail" class="relative mb-5">
+                    <label for="email" class="block text-sm font-normal ml-1 mb-2 text-gray-400">Confirm new password</label>
+                    <input type="password" id="password" formControlName="confirmPassword"
+                      class="py-3 px-4 block w-full border-2 border-gray-100 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-md"
+                      required aria-describedby="email-error">
+                  </div>
+                  
+                  <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email address so we
+                    can get back to you</p>
+                </div>
+                <button  *ngIf="!verifiedMail"  type="submit" (click)="verifyMail()" 
+                  class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded border border-transparent font-semibold bg-[#0B1C39] text-white hover:bg-[#FFD700] focus:outline-none focus:ring-2 focus:ring-[#0B1C39] focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">Reset
+                  password</button>
+                  <button  *ngIf="verifiedMail"  type="submit" (click)="changePassword()"
+                    class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded border border-transparent font-semibold bg-[#0B1C39] text-white hover:bg-[#FFD700] focus:outline-none focus:ring-2 focus:ring-[#0B1C39] focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">Reset
+                    password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </form>
+</dialog>

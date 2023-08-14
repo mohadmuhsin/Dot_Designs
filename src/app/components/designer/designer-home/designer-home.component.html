@@ -1,0 +1,88 @@
+<app-designer-navbar></app-designer-navbar>
+<div class="mt-16"></div>
+<app-sidebar></app-sidebar>
+<div class="p-2 sm:ml-64 mt-16 z-40">
+  <div class="px-4">
+    <section *ngIf="!paid" class="bg-[#0B1C39] dark:bg-gray-900 rounded mt-8">
+      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-12 px-12">
+        <div class="flex flex-col justify-center">
+          <h1
+            class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white">
+          <span class="text-yellow-500"> Boost Your Visibility:</span> Become a Priority Designer! </h1>
+          <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Stand out from the crowd and get noticed by thousands of potential clients by becoming a Priority Designer. By making a
+          small payment, you'll secure a top spot in the designer list, increasing your chances of getting hired and showcasing
+          your talent to a broader audience. Don't miss this opportunity to take your design career to new heights!</p>
+          <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+            <a (click)="showConfirm()"
+              class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white hover:text-[#0B1C39] rounded-lg border border-white hover:border-[#FFD700] hover:bg-[#FFD700] focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+              Get started
+              <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- graph section start-->
+    <div class="charts mt-8"> 
+      <div *ngIf="chartData.length>0" class="pie shadow shadow-md mr-2 border border-sm rounded" [chart]="pieChart">
+      </div>
+      <div *ngIf="DesignCount.length>0" class="pie shadow shadow-md mr-2 border border-sm rounded" [chart]="DesignsPie">
+      </div>
+    </div>
+    <!-- graph end -->
+
+  </div>
+</div>
+
+
+
+<!-- payment confirmation popup start -->
+<div class="popup-container items-center justify-center" *ngIf="confirmation">
+  <div class="card p-3">
+    <img src="assets/credit-card.png" class="w-16 h-16 mt-4" alt="">
+    <p class="cookieDescription  font-bold">Are you sure?</p>
+    <p class="cookieHeading mb-2">Needs a Payment</p>
+    <div class="buttonContainer">
+      <button (click)="proceedToPayment(fee)"
+        class="bg-[#0B1C39] text-sm  rounded py-2 px-3 text-white   mb-5">CONFIRM </button>
+      <button class="bg-gray-200 text-sm py-2 rounded py-2 px-3 mb-5" (click)="onReject()">CANCEL</button>
+    </div>
+  </div>
+</div>
+<!-- end -->
+
+
+
+
+
+<div *ngIf="success" class="success-popup-container show-popup">
+  <div *ngIf="booking" class="success_card justify-center items-center">
+    <button type="button" (click)="closePopup()" class="dismiss">×</button>
+    <div class="header">
+      <div class="image">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+          <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000"
+              d="M20 7L9.00004 18L3.99994 13"></path>
+          </g>
+        </svg>
+      </div>
+      <div class="content">
+        <span class="title">Payment Successful</span>
+        <p class="message">Thank you for your Payment.  </p>
+      </div>
+      <div class="actions">
+        <button type="button"  class="history">explre</button>
+        <button type="button"  class="track">Explore </button>
+      </div>
+    </div>
+  </div>
+</div>
+

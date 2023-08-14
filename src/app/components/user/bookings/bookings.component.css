@@ -1,0 +1,16 @@
+/* bookings.component.css */
+
+/* Optional: If you want to style the search input with an icon */
+i.fas.fa-search {
+    font-size: 14px;
+    top: 10px;
+    left: 10px;
+  }
+  
+  /* Optional: If you want to style the pagination buttons with icons */
+  i.fas.fa-chevron-left,
+  i.fas.fa-chevron-right {
+    font-size: 12px;
+  }
+
+

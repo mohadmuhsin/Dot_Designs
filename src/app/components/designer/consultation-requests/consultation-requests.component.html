@@ -1,0 +1,116 @@
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<app-designer-navbar></app-designer-navbar>
+<div class="mt-16"></div>
+<app-sidebar></app-sidebar>
+<div class="sm:ml-64 mt-16 z-40">
+
+  <div *ngIf="pednings === 0" class="flex flex-col justify-center bg-[#111827] items-center h-screen">
+    <!-- Content for smaller screens -->
+    <p class="text-center text-2xl font-bold text-yellow-500 mb-4 sm:hidden">Your Caption Here</p>
+    <img src="assets/Jan41.jpg" alt="blank" class="w-1/2 h-100 rounded-lg sm:hidden">
+
+    <!-- Content for larger screens -->
+    <div class="hidden sm:flex flex-col justify-center bg-[#111827] items-center h-screen">
+      <p class="text-center text-2xl font-bold text-yellow-500 mb-4">Your Caption Here</p>
+      <img src="assets/Jan41.jpg" alt="blank" class="w-1/2 h-100 rounded-lg">
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-8 ">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-bold">BOOKINGS</h2>
+      <!-- <div class="relative">
+        <i class="absolute inset-y-0 left-0 pl-3 flex items-center fas fa-search text-gray-600"></i>
+        <input type="text" class="pl-10 pr-3 py-2 w-64 border rounded-md text-sm text-gray-800" placeholder="Search..." />
+      </div> -->
+      <i class="absolute  inset-y-0  px-2 py-2 flex items-center fas fa-search text-gray-600"></i>
+      <input type="text" class="input border rounded px-2 py-1" [(ngModel)]="searchQuery" (input)="search()"
+        placeholder="Search" />
+    </div>
+   
+
+    <div class="overflow-x-auto shadow overflow-hidden border-b border-gray-200 rounded-md sm:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-[#0B1C39]">
+          <tr>
+            <th scope="col"
+              class="px-4 py-3 sm:px-3 sm:py-4 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              SL.NO
+            </th>
+            <th scope="col"
+              class="px-4 py-3 sm:px-4 sm:py-4 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              DESIGNSER
+            </th>
+            <th scope="col"
+              class="px-4 py-3 sm:px-4 sm:py-4 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              CONTACT DETAILS
+            </th>
+            <th scope="col"
+              class="px-4 py-3 sm:px-4 sm:py-4 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              Date
+            </th>
+            <th scope="col"
+              class="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">
+              PROJECT DETAILS
+            </th>
+
+              <th class="dropdown  px-4  py-3 sm:px-6 sm:py-4 text-left text-xs font-medium text-gray-200 uppercase tracking-wider" scope="col">
+              
+                <label tabindex="0" class="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Status</label>
+              <ul *ngIf="!filtered"  tabindex="0" class="dropdown-content z-[1] menu p-2 shadow text-black lowercase text-xs sm:text-sm bg-[#FFD700] rounded w-52">
+                <li *ngFor="let item of status"><a (click)="filter(item)">{{ item }}</a></li>
+                
+              </ul>
+              <ul *ngIf="filtered" tabindex="0" class="dropdown-content z-[1] menu p-2 shadow text-black lowercase text-xs sm:text-sm bg-[#FFD700] rounded w-52">
+                <li><a (click)="showall()">see all</a></li>
+                
+              </ul>
+              <!-- Status -->
+             </th>
+
+
+            
+            <th scope="col"
+              class="px-4 py-3 sm:px-6 sm:py-4 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
+              Actions
+            </th>
+          
+          </tr>
+          </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let item of requests |paginate:
+                    {
+                        itemsPerPage: tableSize,
+                        currentPage:page,
+                        totalItems:count
+                    }   let i = index">
+            <td class="px-3 py-2 sm:px-3 sm:py-4 whitespace-nowrap">{{i+1}}</td>
+            <td class="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">{{item.userId.username}}</td>
+            <td class="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">{{item.userId.mobileNumber}}</td>
+            <td class="px-3 py-2 sm:px-4 sm:py-4 whitespace-nowrap">{{item.date|date:"dd-mm-yyy"}}</td>
+            <td class="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap  ellipsis">{{item.designId.name}}</td>
+            <td class="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap  ellipsis">{{item.status}}</td><td [routerLink]="['/booking_details',item._id]" class="px-6 py-4 whitespace-nowrap text-center">
+              <button [routerLink]="['/consultationDetails',item._id]" class="text-red-500 hover:text-red-600" title="Info">
+                <img src="assets/info_1629161.png" alt="" class="w-6 h-6">
+              </button>
+            </td>
+          </tr>       
+        </tbody>
+      </table>
+      <div *ngIf="requests.length ===   0" class="text-center  my-6 text-md font-medium flex justify-center items-center">
+        No results found! 
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between mt-4">
+      <pagination-controls 
+      previousLabel="Prev"
+       nextLabel="Next" 
+       (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  </div>
+
+</div>

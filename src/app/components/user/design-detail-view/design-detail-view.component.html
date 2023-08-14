@@ -1,0 +1,90 @@
+<app-header></app-header>
+  <div class="overflow-hidden h-3/5 flex flex-col sm:flex-row shadow shadow-md border border-sm rounded mx-4 my-4">
+  
+    <div class="w-full sm:w-2/4 carousel rounded-l">
+      <div class="carousel-item w-full">
+        <img [src]="design.images[0]" class="w-full" alt="Tailwind CSS Carousel component" />
+      </div>
+      <div *ngIf="design?.images[1]" class="carousel-item w-full">
+        <img [src]="design?.images[1]" class="w-full" alt="Tailwind CSS Carousel component" />
+      </div>
+      <div *ngIf="design?.images[2]" class="carousel-item w-full">
+        <img [src]="design?.images[2]" class="w-full" alt="Tailwind CSS Carousel component" />
+      </div>
+    </div>
+  
+    <div class="w-full sm:w-2/4 px-4 py-8">
+      <h2 class="text-sm sm:text-2xl font-bold mb-4">{{ design.name }}</h2>
+  
+      <div class="border-b-2 mb-4"></div>
+      <div class="flex mb-2">
+        <div class="font-bold text-xs sm:text-1xl mr-2">Specifications</div>
+      </div>
+      <span class="text-1xl font-semibold mb-5"></span>
+      <div class="flex mb-2">
+        <div class="font-semibold text-xs sm:text-sm mr-2">MaterialType:</div>
+        <div class="text-xs sm:text-sm">{{ design.materialType }}</div>
+      </div>
+  
+      <div class="flex mb-2">
+        <div class="font-semibold text-sm mr-2">FinishType:</div>
+        <div class="text-sm">{{ design.finishType }}</div>
+      </div>
+  
+      <div class="flex mb-2">
+        <div class="font-semibold text-xs sm:text-sm mr-2">Description:</div>
+        <div class="text-xs sm:text-sm">{{ design.description }}</div>
+      </div>
+      <div class="border-b-2"></div>
+      <div class="relative">
+        <div class="absolute flex items-center text-xs font-medium">
+          Installation within 45 days
+        </div>
+        <div class="card-button flex flex-row items-center justify-end">
+          <img src="assets/heart.png" class="svg-icon mt-4 " (click)="addTowhishlist(design._id)" alt="Edit Icon"
+            style="width: 35px; height: 35px; margin-right: 8px;">
+          <button [routerLink]="['/consultation_register',design.designer,design._id]"
+            class="px-4 py-2 bg-[#0B1C39] hover:bg-[#FFD700] text-white text-xs sm:text-base hover:text-[#000000] rounded mt-4">GET
+            A QUOTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- feedbacks start-->
+  <div *ngIf="feedbacks.length > 0" class="flex justify-between px-7 mt-8">
+    <div class="text-lg font-semibold">Customer stories</div>
+    <div *ngIf="!showAllItems && feedbacks.length > 3" (click)="toggleShowAllItems()"
+      class="text-xs font-medium cursor-pointer">
+      See all
+    </div>
+    <div *ngIf="showAllItems" (click)="toggleShowAllItems()" class="text-xs font-medium cursor-pointer">
+      See less
+    </div>
+  </div>
+  
+  <div *ngIf="feedbacks" class="w-full px-6 flex flex-row flex-wrap justify-center">
+    <div *ngFor="let feedback of (showAllItems ? feedbacks : feedbacks | slice:0:2)"
+      class="container overflow-hidden bg-white mb-4 rounded-lg h-2/4 md:h-1/3 w-full sm:w-1/2 xl:w-1/3 mx-1 flex-shrink-0 border border-lg shadow-md sm:flex flex-row">
+      <img class="object-cover h-1/2 sm:h-full w-full sm:w-1/2" [src]="feedback.image" alt="Article" />
+      <div class="p-6 flex flex-col">
+        <div class="flex flex-row items-center">
+          <img src="assets/location.png" alt="" class="h-4 w-4 mr-2" />
+          <span class="text-xs font-medium text-[#007BFF] uppercase dark:text-[#007BFF]">status</span>
+        </div>
+        <div class="">
+          <p class="mt-2 text-sm text-gray-600 lowercase dark:text-gray-400">{{ feedback.text }}</p>
+        </div>
+        <div class="font-semibold text-sm flex justify-start">
+          <p>(name of user)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<app-footer></app-footer>
+
+
+
+

@@ -1,0 +1,73 @@
+<app-admin-nav></app-admin-nav>
+<app-admin-sidebar></app-admin-sidebar>
+<div class="p-2 sm:ml-64  z-40 ">
+    <div class="p-4 ">
+    <div *ngIf="users" class="mx-auto max-w-screen-lg px-4 py-8 ">
+        <!-- Search bar -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+            <input type="text" [(ngModel)]="searchQuery"  (input)="search()"
+                class="input w-full sm:w-auto mb-2 sm:mb-0 px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Search..." />
+        </div>
+        <!-- Table -->
+        <div class="overflow-x-auto  ">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50 ">
+                    <tr class="bg-[#0B1C39] text-white">
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                            Sl. No.
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                            Name
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                            Place
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200 ">
+                    <!-- Example data row -->
+                    <tr *ngFor="let user of users |paginate:
+                    {
+                        itemsPerPage: tableSize,
+                        currentPage:page,
+                        totalItems:count
+                    } 
+                    let i=index" class="hover:bg-blue-50">
+                        <td class="px-6 py-4 whitespace-nowrap">{{i+1}}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{user.username}}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{user.email}}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button *ngIf="user.active" (click)="blockUser(user._id)" class="text-red-500 hover:text-white bg-white hover:bg-red-500 border border-red-500 rounded px-2 btn-xs">Block</button>
+                            <button *ngIf="!user.active" (click)="unblockUser(user._id)" class="text-green-500 hover:text-white bg-white hover:bg-green-500 border border-green-500 rounded px-2 btn-xs">Unblock</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="noResultsFound" class="text-center  mt-4 text-md font-mediumflex justify-center items-center">
+                No results found for '{{ searchQuery }}'
+            </div>
+        </div>
+    
+        <!-- Pagination -->
+        <div *ngIf="!noResultsFound" class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4">
+           
+            <pagination-controls 
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="onTableDataChange($event)"
+            >
+
+            </pagination-controls>
+        </div>
+    </div>
+
+    </div>
+</div>

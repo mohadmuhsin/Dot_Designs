@@ -1,0 +1,87 @@
+<div *ngIf="Loader" class="spinner fixed center h-screen w-screen   z-50 flex justify-center items-center"></div>
+
+
+
+
+
+
+<app-header *ngIf="!Loader"></app-header>
+
+<!-- carousel -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" />
+<div class="carousel w-full h-3/4">
+  <div id="slide1" class="carousel-item relative w-full ">
+    <div class="image-overlay absolute inset-0 bg-black bg-opacity-10"></div>
+    <img src="assets/homepage1-1-1500x850.jpg" class="w-full " />
+
+  </div>
+  <div id="slide2" class="carousel-item relative w-full">
+    <img src="assets/retro-wall-mockup-psd-living-room-interior-design_53876-114541.avif" class="w-full" />
+
+  </div>
+  <div id="slide3" class="carousel-item relative w-full">
+    <img src="assets/modern-luxury-authentic-dining-room-interior-design-with-picture-frame.jpg" class="w-full" />
+
+  </div>
+  <div id="slide4" class="carousel-item relative w-full">
+    <img src="assets/Nail Art Delights_ Unleashing Your Creativity at Your Fingertips.png" class="w-full" />
+  </div>
+</div>
+
+
+<div *ngIf="!Loader" class="center items-center">
+  <!-- captions -->
+  <div class=" mt-10 sm:mt-20  px-14 mb-3">
+    <h1 class="text-2xl font-semibold sm:font-medium lg:text-4xl md:text-3xl flex justify-center sm:justify-start  mt-5">Design Portfolio</h1>
+    <h4 class="text-md  lg:text-xl md:text-lg mt-2">
+      End-to-end designs by
+      <span class="font-bold lg:text-lg md:text-base">talented designers.</span>
+      Your search ends here.
+    </h4>
+    <h5 *ngIf="!showAllItems && filteredCategories.length>6" (click)="toggleShowAllItems()" class="flex justify-end  cursor-pointer">see all</h5>
+    <h5 *ngIf="showAllItems" (click)="toggleShowAllItems()" class="flex justify-end cursor-pointer ">see less</h5>
+  </div>
+
+  <!-- cards starts -->
+  
+    <div *ngIf="filteredCategories" class="flex flex-wrap justify-center  mb-16 ">
+      <div *ngFor="let categoryItem of  (showAllItems ? filteredCategories : filteredCategories | slice:0:6)" [routerLink]="['/design_list',categoryItem._id]"
+        class="card relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 mx-5 my-5 ">
+        <div class="card-img relative">
+          <div class="image-overlay absolute inset-0 bg-black bg-opacity-30 rounded-md"></div>
+          <img class="rounded-md w-full h-full object-cover animated-image" [src]="categoryItem.image"
+            alt="product image" />
+          <div class="card-footer absolute bottom-0 left-0 px-4 py-3  text-white w-full">
+            <!-- bg-black bg-opacity-10 -->
+            <span class="text-lg font-bold w-full shadow shadow-lg overflow-hidden whitespace-normal overflow-ellipsis">
+              {{ categoryItem.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  <!-- <div class="mx-2" > -->
+  <section *ngIf="!Loader"
+     class="mb-16 bg-no-repeat bg-[url('https://img.freepik.com/free-photo/modern-apartment-with-comfortable-sofa-decor-generated-by-ai_188544-38495.jpg?size=626&ext=jpg&uid=R109351503&ga=GA1.2.1628098986.1689577107&semt=ais')] bg-gray-700 bg-blend-multiply">
+    <div class="px-4 mx-auto max-w-screen-xl  text-center  py-16 lg:py-35">
+      <h1 class="mb-4 text-4xl font-semibold tracking-wide leading-none text-white md:text-5xl lg:text-6xl">Meet our
+        talented designers, shaping spaces with creativity.</h1>
+      <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"></p>
+      <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+        <a routerLink="/designer_list"
+          class="inline-flex justify-center rounded items-center py-3 px-5 text-base font-medium text-center text-[#0B1C39] hover:text-white  bg-[FFD700] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+          Connect with Designers
+        </a>
+        <a href="#"
+          class="inline-flex justify-center rounded hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white  border border-white  hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
+          Explore Designs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>

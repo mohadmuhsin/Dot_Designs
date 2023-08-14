@@ -19,8 +19,6 @@ export class MyInterceptorInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${userToken}`,
         },
       });
-      
-
     return next.handle(authReq);
   }
 }

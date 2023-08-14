@@ -1,0 +1,38 @@
+<app-header></app-header>
+
+    <div class=" w-1/2 mx-auto mt-8">
+      <form [formGroup]="feedbackForm" (submit)="submit()" class="shadow-md rounded-b-md">
+            <div class="bg-[#0B1C39] rounded-t-md p-4">
+                <h2 class="text-white text-lg lg:text-xl font-bold bg-[#0B1C39] p-2">ADD YOUR FEEDBACK </h2>
+            </div>
+            <div class="mt-4 p-4">
+                <div class="grid grid-cols-1  gap-6">
+                    <div class="mb-2 px-5">
+                        <label for="">Tell Us Your Opinion</label>
+                        <textarea id="bio" formControlName="feedback" placeholder="write something...."
+                            class="w-full shadow-md mb-2 rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900"></textarea>
+                        <label for="">Upload photos</label>
+                            <input id="image" formControlName="image" class="shadow-md rounded py-4 px-3 focus:outline-blue-900 w-full" #imageInput placeholder="Choose a file" multiple>
+                        <img *ngIf="imageUrl" [src]="imageUrl"
+                            class="w-20 h-20 mt-4 rounded sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 mx-2" alt="">
+                    </div>
+                    
+        
+                    
+        
+        
+                </div>
+        
+                <div class="flex   px-5 py-5">
+                    <a (click)="back()"
+                        class="bg-[#0B1C39] hover:bg-[#FFD700] transition duration-200 mr-4 text-white hover:text-[#000000] py-3 px-6 rounded">
+                        BACK
+                    </a>
+                    <button type="submit"
+                        class="bg-[#0B1C39] hover:bg-[#FFD700] text-white hover:text-[#000000] transition duration-200 py-3  px-6 rounded">
+                        SUBMIT
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>

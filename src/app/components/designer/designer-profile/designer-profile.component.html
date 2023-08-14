@@ -1,0 +1,100 @@
+<app-designer-navbar></app-designer-navbar>
+<div class="mt-16"></div>
+<app-sidebar></app-sidebar>
+<div class="pt-2 sm:ml-64 mt-16 z-40">
+    
+    <div class="">
+        <section class="p-6 bg-white  text-gray-50">
+            <div class=" flex justify-between">
+                <!-- <h3 class="font-medium  ">YOUR PROFILE </h3> -->
+                <!-- <button class=" border border-md border-white px-3 py-1 rounded">Be a priority designer</button> -->
+            </div>
+           <div class="bg-[#0B1C39] rounded pb-3 ">
+            <form [formGroup]="form" (submit)="update()"  action="" class="container flex flex-col mx-auto space-y-12 pt-2">
+                <!-- Profile Fieldset -->
+                <fieldset class="grid grid-row sm:grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-[#0B1C39]">
+                    <div class="space-y-2  flex flex-col justify-center items-center">
+                        <img [src]="imageUrl" alt="ldkf"  class=" w-28 h-28 rounded mb-2 " >
+                        <div class="flex items-center justify-center">
+                            <input id="image" formControlName="image" class="shadow-md  text-white text-xs rounded py-2 px-2 bg-[#0B1C39] focus:outline-blue-900 w-32"
+                                #imageInput placeholder="Change Profile Photo">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                        <div class="col-span-full sm:col-span-3">
+                            <label for="username" class="text-sm">Username</label>
+                            <input id="username" formControlName="email"  readonly type="text" placeholder="Username"
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900">
+                        </div>
+                        <div class="col-span-full sm:col-span-3">
+                            <label for="website" class="text-sm">Website</label>
+                            <input id="website" formControlName="website" type="text" placeholder="https://"
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900">
+                        </div>
+                        <div class="col-span-full">
+                            <label for="bio" class="text-sm">Bio</label>
+                            <textarea id="bio" formControlName="bio" placeholder=""
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900"></textarea>
+                        </div>
+                        <div class="col-span-full">
+                            <label for="bio" class="text-sm"></label>
+                            <div class="flex items-center space-x-2">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- Personal Information Fieldset -->
+                <fieldset class="grid grid-cols-4 gap-6 p-3 rounded-md shadow-sm bg-[#0B1C39]">
+                    <div class="space-y-2 px-4 col-span-full lg:col-span-1">
+                        <p class="font-medium ">Personal Information</p>
+                        <p class="text-xs">Enhance Your Profile: Craft an Impressive Designer Bio to Captivate Potential Clients!
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                        <div class="col-span-full sm:col-span-3">
+                            <label for="firstname" class="text-sm ">Company name</label>
+                            <input id="firstname" formControlName="entity_name" type="text" placeholder="First name"
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700  py-2 px-3 text-gray-900">
+                        </div>
+                        
+                        <div class="col-span-full sm:col-span-3">
+                            <label for="email" class="text-sm">Email</label>
+                            <input id="email" readonly formControlName="email" type="email" placeholder="Email"
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900">
+                        </div>
+                        <div class="col-span-full">
+                            <label for="address" class="text-sm">Address</label>
+                            <input id="address" formControlName="address" type="text" placeholder=""
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900">
+                        </div>
+                        <div class="col-span-full sm:col-span-2">
+                            <label for="city"  class="text-sm">District</label>
+                            <input id="city" formControlName="district" type="text" placeholder=""
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900">
+                        </div>
+                        <div class="col-span-full sm:col-span-2">
+                            <label for="state" class="text-sm">State / Province</label>
+                            <input id="state" formControlName="state" type="text" placeholder=""
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900">
+                        </div>
+                        <div class="col-span-full sm:col-span-2">
+                            <label for="mobileNumber"  class="text-sm">Mobile Number</label>
+                            <input id="mobileNumber"  formControlName="mobileNumber" type="tel" placeholder="Enter your mobileNumber"
+                                class="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 py-2 px-3 text-gray-900">
+                        </div>
+                    </div>
+                </fieldset>
+        
+          
+            <div class="flex justify-end px-4">
+                <button type="submit" 
+                    class="border border-xs border-white  hover:border-[#0B1C39] hover:text-[#0B1C39] duration-200 transition  rounded py-2 px-4  hover:bg-[#FFD700]">Update Profile</button>
+            </div>
+            </form>
+           </div>
+            
+        </section>
+    </div>
+</div>
+
+

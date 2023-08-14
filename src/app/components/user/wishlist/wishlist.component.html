@@ -1,0 +1,48 @@
+<app-header></app-header>
+<!-- component -->
+<div class="  container px-4 md:px-6  py-4 flex px-3   items-center">
+    <!-- - more free and premium Tailwind CSS components at https://tailwinduikit.com/ - -->
+    <div class="">
+        <!-- <div>
+            <p class="text-sm px-2 leading-4 text-gray-600 dark:text-white">Home</p>
+        </div> -->
+        <div class="mt-3">
+            <h1 class="text-2xl px-2 lg:text-3xl tracking-tight font-semibold leading-8 lg:leading-9 text-gray-800 dark:text-white ">
+                Favourites
+            </h1>
+        </div>
+        <div class="mt-2">
+            <p class="text-1xl px-2  tracking-tight leading-6 text-gray-600 dark:text-white">0{{count}} items</p>
+        </div>
+        <div class="flex flex-row ">
+        <div  *ngFor="let design of designs" [routerLink]="['/design_detailView',design._id]" class="mt-6 lg:mt-12 mx-3 text-white rounded-md bg-[#0B1C39]">
+            <div class="flex flex-col">
+                <div class="relative rounded-md">
+                    <img  class=" lg:block w-64 h-48 rounded-t-md" [src]="design.images[0]" alt="bag" />
+                   
+                    <button aria-label="close" (click)="removeFromWishlist(design._id)"
+                        class="top-2 right-4   absolute p-1.5 bg-gray-800   text-white hover:text-gray-400">
+                        <svg class="fil-current" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 1L1 13" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M1 1L13 13" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-2  mb-1  text-white justify-between items-center">
+                <div class="flex justify-center  text-white ">
+                    <p class="tracking-tight text-1xl font-medium leading-6  text-white ellipsis">{{design.name}}
+                    </p>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<app-footer></app-footer>

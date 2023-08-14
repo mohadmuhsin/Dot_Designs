@@ -1,0 +1,71 @@
+<app-designer-navbar></app-designer-navbar>
+<div class="mt-16"></div>
+<app-sidebar></app-sidebar>
+<div  class="p-2 sm:ml-64 mt-16 z-40">
+    <div class="p-4">
+        <div class="mx-5 mt-8 text-xl font-semibold">BOOKING DETAILS</div>
+        <div class="overflow-hidden bg-white rounded-lg h-full lg:h-2/3 shadow-md mx-5 my-4 sm:flex flex-row">
+            <img class="object-fit w-full md:w-1/2" [src]="bookingDetails.designId.images[0]" alt="Article">
+            <div class="p-6 flex flex-col justify-between">
+                <div>
+                    <span
+                        class="text-xs font-medium text-[#007BFF] uppercase dark:text-[#007BFF]">{{bookingDetails.status}}</span>
+                    <a href="#"
+                        class="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline"
+                        tabindex="0" role="link">{{bookingDetails.designId.name}}</a>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{bookingDetails.designId.description}}</p>
+                </div>
+
+                <div class="flex mt-2">
+                    <div class="font-semibold mt-2 sm:mt-0  text-sm mr-2">MaterialType:</div>
+                    <div class="text-sm mt-2 sm:mt-0 ">{{bookingDetails.designId.materialType}}</div>
+                </div>
+
+                <div class="flex ">
+                    <div class="font-semibold text-sm mr-2">FinishType:</div>
+                    <div class="text-sm">{{bookingDetails.designId.finishType}}</div>
+                </div>
+                <div  class=" border-b-2 mt-4  sm:border mb-1"></div>
+
+                <div *ngIf=" bookingDetails.status !== Pending" class="flex mb-1">
+                    <div class="font-medium text-md mr-2">Designed for:</div>
+                    <div class="text-lg">{{bookingDetails.userId.username}}</div>
+                </div>
+
+                        <!-- <div class="flex mb">
+                            <div class="font-semibold text-sm mr-2">Work Started:</div>
+                            <div class="text-sm">glossy</div>
+                        </div>
+                        <div class="flex mb">
+                            <div class="font-semibold text-sm mr-2">Work Ended:</div>
+                            <div class="text-sm">glossy</div>
+                        </div> -->
+
+
+                <div class=" border-b-2 mt-4  sm:border mb-1"></div>
+
+                <div class=" mt-2 sm:mt-4 flex justify-between items-center">
+                    <div class="flex  flex-col">
+                    
+
+                    </div>
+                    <div class="flex justify-end  flex-col sm:flex-row ">
+                        <button consultationDetails (click)="acceptRequest(bookingDetails._id)" *ngIf=" bookingDetails.status === Pending" class="bg-[#0B1C39]  text-white font-normal sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg mr-2   rounded">ACCEPT REQUEST</button>
+                        <button consultationDetails (click)="rejectRequest(bookingDetails._id)" *ngIf=" bookingDetails.status === Pending" class="bg-[#0B1C39]  text-white font-normal sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg   rounded">REJECT REQUEST</button>
+                        <button consultationDetails (click)="rejectRequest(bookingDetails._id)" *ngIf=" bookingDetails.status === waiting" class="hover:bg-[#FF0000] bg-white hover:shadow hover:shadow-lg border border-[#FF0000] text-[#FF0000] hover:text-white font-normal sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg mb-1 mr-0 sm:mr-2 sm:mb-0  rounded">REJECT </button>
+                        <!-- <button (click)="showConfirm(bookingDetails._id)" *ngIf=" bookingDetails.status === waiting" class="hover:bg-[#00FF00] bg-white text-green-500 hover:text-white  border border-green-400 font-semibold sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg mb-1 mr-0 sm:mr-2 sm:mb-0 rounded">PROCEED & PAY</button> -->
+                        <button consultationDetails (click)="consultationDone(bookingDetails._id)" *ngIf=" bookingDetails.status === consultation"  class="bg-[#0B1C39] text-white font-normal sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg   rounded">CANCEL  CONSULTATION</button>
+                        <button (click)="StartProject(bookingDetails._id)" *ngIf="bookingDetails.status === consDone" class="bg-[#0B1C39] text-white font-normal sm:font-semibold py-2 px-3 mr-2 text-xs sm:text-md shadow shadow-lg   rounded">START PROJECT </button>
+                        <div class="mb-2"></div>
+                        <button (click)="StartProject(bookingDetails._id)" *ngIf="bookingDetails.status === consDone" class="bg-[#0B1C39] text-white font-normal sm:font-semibold py-2 px-3  text-xs  shadow shadow-lg   rounded">REJECT PROJECT </button>
+                        <button (click)="projectCompleted(bookingDetails._id)" *ngIf=" bookingDetails.status === progress" class="bg-[#0B1C39] text-white font-normal sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg   rounded">PROJECT COMPLETED</button>
+                        <!-- <button consultationDetails *ngIf=" bookingDetails.status === completed"
+                            class="bg-[#0B1C39] text-white font-normal sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg   rounded">Feedback
+                            & Review</button> -->
+                        <!-- <button *ngIf=" bookingDetails.status === waiting" class="bg-[#0B1C39] text-white font-normal sm:font-semibold py-2 px-3 text-xs sm:text-md shadow shadow-lg   rounded">PROCEED & PAY</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

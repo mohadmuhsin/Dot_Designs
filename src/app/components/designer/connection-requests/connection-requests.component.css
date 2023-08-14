@@ -1,0 +1,23 @@
+svg#freepik_stories-work-time:not(.animated) .animable {
+    opacity: 0;
+}
+
+svg#freepik_stories-work-time.animated #freepik--background-complete--inject-2 {
+    animation: 1.5s Infinite linear wind;
+    animation-delay: 0s;
+}
+
+@keyframes wind {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(1deg);
+    }
+
+    75% {
+        transform: rotate(-1deg);
+    }
+}
+

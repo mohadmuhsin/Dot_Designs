@@ -1,0 +1,43 @@
+
+<app-header></app-header>
+
+<div class="z-40">
+    <div class="p-4">
+      <div class="center items-center">
+        <div *ngIf="design.length === 0" class="flex justify-center items-center flex-col">
+         <img src="assets/No data.gif" alt="">
+          <button routerLink="/">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg> Explore more
+          </button>        
+        </div>
+        
+        <!-- captions -->
+        <div *ngIf="design.length>0" class="ml-5 mt-10 mb-3">
+          <h2 class="text-1xl lg:text-3xl font-medium md:text-2xl mt-3">Designs</h2>
+        </div>
+        <!-- cards -->
+        <div *ngIf="design" class="flex flex-wrap  mx-5 lg:mx-4" >
+            <div *ngFor="let designItem of design"   class="card rounded-md bg-gray-900 mr-3 pb-3 mb-3">
+              <div [routerLink]="['/design_detailView',designItem._id]" class="card-img">
+                <img class="rounded-t-md w-full h-full object-cover animated-image" [src]="designItem.images[0]" alt="product image" />
+              </div>
+              
+              <div class="card-footer px-3">
+                <span class="ttext-xl lg:text-xl font-normal text-white w-3/4  overflow-hidden whitespace-nowrap overflow-ellipsis">
+                  {{ designItem.name}}
+                </span>
+                
+                <div (click)="addTowhishlist(designItem._id)" class="card-button" >
+                  <img src="assets/like.png" class="svg-icon" alt="Edit Icon" style="width: 25px; height: 25px; ">
+                </div>
+              </div>
+            </div>
+              
+        </div>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>
