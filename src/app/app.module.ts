@@ -10,7 +10,6 @@ import { StripeModule } from 'stripe-angular';
 import { StoreModule } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast'
-import { CalendarModule } from 'primeng/calendar';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { SliderModule } from 'primeng/slider';

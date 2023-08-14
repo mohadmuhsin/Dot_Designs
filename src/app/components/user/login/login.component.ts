@@ -99,6 +99,8 @@ export class LoginComponent implements OnInit {
         },
         (err) => {
           Emitters.authEmitter.emit(false);
+          console.log(err);
+          
           const errorMessage = err.error.message || 'An error occurred';
           this.toastr.warning(errorMessage, 'Error!');
         }
