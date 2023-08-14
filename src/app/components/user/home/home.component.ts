@@ -40,7 +40,11 @@ export class HomeComponent implements OnInit {
     this.category$ = this.store.pipe(select(selectCategories));
     this.category$?.subscribe((res: any) => {
       this.filteredCategories = res;
-    });
+    }, (err) => {
+      console.log(err.error.message,err);
+      
+    }
+    );
 
     this.service.user().subscribe(
       (res: any) => {
@@ -48,6 +52,8 @@ export class HomeComponent implements OnInit {
         Emitters.authEmitter.emit(true);
       },
       (err) => {
+        console.log(err.error.message,"error",err);
+        
         Emitters.authEmitter.emit(false);
       }
     );
