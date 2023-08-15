@@ -30,9 +30,9 @@
               "src/favicon.ico",
               "src/assets",
               {
-                "glob": "output.css",
-                "input": "src/assets/dist/",
-                "output": "/dist/"
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [

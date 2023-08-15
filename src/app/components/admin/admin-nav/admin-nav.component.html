@@ -48,8 +48,10 @@
     class="fixed right-0 z-50 bg-white border border-[#0B1C39] mt-2 w-38 rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:hidden">
     <a class="block px-4  py-2 text-md text-bold bg-[#0B1C39] text-white" role="menuitem" tabindex="-1"
       id="navbar-menu-item-2">{{ emitter }}</a>
-    <a (click)="toggleNavbarDropdown()" routerLink="/categoris" class="border border-gray-300 flex bg-white shadow items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Designs</a>
-    <a class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Dashboard</a>
+    <a routerLink="/admin_login" (click)="toggleNavbarDropdown()" routerLink="/categoris" class="border border-gray-300 flex bg-white shadow items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Designs</a>
+    <a routerLink="/admin" (click)="toggleNavbarDropdown()" class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Dashboard</a>
+    <a routerLink="/designers" (click)="toggleNavbarDropdown()" class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Designers</a>
+    <a routerLink="/users" (click)="toggleNavbarDropdown()" class="flex items-center p-2 m-1 text-gray-900 rounded-sm text-[#0B1C39] hover:text-white border border-gray-300 bg-white shadow bg-white px-5 hover:bg-[#0B1C39] group" role="menuitem" tabindex="-1" id="navbar-menu-item-2">Users</a>
     <button *ngIf="!admin_authenticated" routerLink="/admin_login" class="block px-4 py-2 text-sm bg-white border border-gray-300 px-5 text-gray-700" role="menuitem" tabindex="-1" id="navbar-menu-item-4">
       Login/Signup
     </button>

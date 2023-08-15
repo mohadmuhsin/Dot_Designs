@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class AuthServiceService {
   private isAuthenticated: boolean = false;
-  private readonly url = 'https://dotdesigns.site/';
+  private readonly url = 'https://dotdesigns.site';
 
   constructor(private http: HttpClient) {}
 
