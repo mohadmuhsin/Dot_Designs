@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { log } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import { Emitters } from 'src/app/emitter/emitter';
 import { AuthServiceService } from 'src/app/services/auth-service.service';

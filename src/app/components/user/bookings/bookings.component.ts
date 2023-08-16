@@ -27,6 +27,9 @@ export class BookingsComponent  implements OnInit {
   tableSize: number = 5
   tableSizes: any = [5, 10, 15, 20]
 
+  status: string[] =["Pending","Waiting for Payment","waiting for consultation","Consultation Done","Work in Progress", "Completed"]
+  filtered:boolean = false
+
     constructor(
       private service: AuthServiceService,
       private  route:ActivatedRoute,
@@ -36,6 +39,7 @@ export class BookingsComponent  implements OnInit {
 
   ngOnInit() {
     this.getBookings() 
+    this.filtered = false
   }
   
   getBookings() {
@@ -48,6 +52,7 @@ export class BookingsComponent  implements OnInit {
 
   search() {
     if (this.searchQuery.trim() !== '') {
+       this.filtered = true
       this.booking = this.booking.filter((booking: any) =>
         booking.designerId.entity_name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
         booking.designId.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -56,7 +61,18 @@ export class BookingsComponent  implements OnInit {
     } else {
       this.getBookings()
       this.noResultsFound = false
+      this.filtered = false
     }
+  }
+
+   filter(status: string) {
+    this.booking = this.booking.filter((item: any) => item.status === status)
+     this.filtered = true
+  }
+
+  showall() {
+    this.getBookings()
+     this.filtered = false
   }
     
 
@@ -64,11 +80,5 @@ export class BookingsComponent  implements OnInit {
     this.page = event
     this.getBookings()
   }
-
-  // onTableSizeChange(event: any) {
-  //   this.tableSize = event.target.value
-  //   this.page = 1
-  //   this.getBookings()
-  // }
 
 }

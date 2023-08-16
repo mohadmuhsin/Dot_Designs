@@ -2,7 +2,6 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { Socket } from 'ngx-socket-io' 
 import { SocketService } from 'src/app/services/socket.service';
 import { ToastrService } from 'ngx-toastr';
-import { error } from 'console';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { Emitters } from 'src/app/emitter/emitter';
 

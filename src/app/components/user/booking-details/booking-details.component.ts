@@ -125,7 +125,7 @@ export class BookingDetailsComponent implements OnInit {
       const script = window.document.createElement('script')
       script.id = 'stripe-script'
       script.type = 'text/javascript'
-      script.src = 'http://checkout.stripe.com/checkout.js'
+      script.src = 'https://checkout.stripe.com/checkout.js'
       script.onload=()=>{
         this.paymentHandler = (<any>window).StripeCheckout.configure({
           key:'pk_test_51NUoowSITa8nEg8xS1VwcPLK6TbF2q8Pwqx2CmfprU05wyOsdp97rxjTgnzldI7CVmE2gJJTwrFBrSkkkOpNSDCy000096FGKF',

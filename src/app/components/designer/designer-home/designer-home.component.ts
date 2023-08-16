@@ -6,7 +6,6 @@ import { SharedDataServiceService } from '../../../services/shared-data-service.
 import { Observable, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Chart } from 'angular-highcharts';
-import { log } from 'util';
 
 
 
@@ -119,7 +118,6 @@ export class DesignerHomeComponent implements OnInit {
     key:'pk_test_51NUoowSITa8nEg8xS1VwcPLK6TbF2q8Pwqx2CmfprU05wyOsdp97rxjTgnzldI7CVmE2gJJTwrFBrSkkkOpNSDCy000096FGKF',
     locale:'auto',
     token:function(stripeToken:any){
-      console.log(stripeToken, "pinnnnnnnnnnnnn");
       paymentStripe(stripeToken,amount,id)
       }
     })
@@ -164,7 +162,7 @@ export class DesignerHomeComponent implements OnInit {
     const script = window.document.createElement('script')
     script.id = 'stripe-script'
     script.type = 'text/javascript'
-    script.src = 'http://checkout.stripe.com/checkout.js'
+    script.src = 'https://checkout.stripe.com/checkout.js'
     script.onload=()=>{
       this.paymentHandler = (<any>window).StripeCheckout.configure({
         key:'pk_test_51NUoowSITa8nEg8xS1VwcPLK6TbF2q8Pwqx2CmfprU05wyOsdp97rxjTgnzldI7CVmE2gJJTwrFBrSkkkOpNSDCy000096FGKF',

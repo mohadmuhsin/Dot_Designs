@@ -1,10 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { log } from 'console';
-import { google } from 'googleapis';
 import { ToastrService } from 'ngx-toastr';
 import { Emitters } from 'src/app/emitter/emitter';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
@@ -50,11 +47,9 @@ export class LoginComponent implements OnInit {
   }
 
   GoogleLogin() {
-    console.log('ith call aaaaaaaaaaavnn nd');
 
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      console.log(user, 'sdkjjf');
     });
     this.loginWithgoogle(this.user);
   }
