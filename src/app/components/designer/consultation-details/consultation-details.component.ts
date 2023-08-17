@@ -13,6 +13,7 @@ export class ConsultationDetailsComponent implements OnInit {
 Pending:string="Pending"
   waiting: string = "Waiting for Payment"
   consultation: string = "waiting for consultation"
+  consultationCancelled:string = "Consultation Cancelled"
   consDone:string = "Consultation Done"
   progress:string = "Work in Progress"
   completed: string = "Completed"
@@ -75,6 +76,13 @@ Pending:string="Pending"
     })
   }
 
+  CancelConsultation(id: any) {
+     const _id:any = id
+    this.service.CancelConsultation(_id).subscribe((res)=>{
+      window.location.reload()
+    })
+  }
+
   consultationDone(id:any) {
      const _id:any = id
     this.service.consultationDone(_id).subscribe((res)=>{
@@ -102,6 +110,14 @@ Pending:string="Pending"
 //         .then(() => {
 //           this.router.navigate([currentRoute]);
 //         });
+    })
+  }
+  RejectProject(id:any) {
+     const _id:any = id
+    this.service.RejectProject(_id).subscribe((res)=>{
+      console.log(res);
+      this.toastr.success("Project started Successfully","Success",{progressBar:true})
+      window.location.reload()
     })
   }
 

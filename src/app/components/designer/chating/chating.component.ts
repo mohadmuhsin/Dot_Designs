@@ -62,13 +62,11 @@ export class ChatingComponent implements OnInit,AfterViewChecked {
     this.chatshow = true
     this.service.getUser(user).subscribe({
       next: (res: any)=>{
-        console.log(res.username,"dskj");
         this.username = res.username
 
       }
     })
     this.chatService.getFullUserChat(this.userId,this.designerId).subscribe((res: any) => {
-      console.log(res,"dlk");
       this.socket.emit('join',res.cid) 
       this.messages = res.result
       this.connectionId=res.cid

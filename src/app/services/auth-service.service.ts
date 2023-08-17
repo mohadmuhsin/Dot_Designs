@@ -38,8 +38,6 @@ export class AuthServiceService {
   }
 
   changePassword(data: any) {
-    console.log(data, 'dllfdk');
-
     return this.http.patch(
       `${this.url}/changePassword/${data}`,
       { data },
@@ -393,6 +391,14 @@ export class AuthServiceService {
       withCredentials: true,
     });
   }
+  CancelConsultation(id: any) {
+    const bookings = {
+      id: id,
+    };
+    return this.http.patch(`${this.url}/designer/CancelConsultation`, bookings, {
+      withCredentials: true,
+    });
+  }
 
   consultationDone(id: any) {
     const bookings = {
@@ -408,6 +414,15 @@ export class AuthServiceService {
       id: id,
     };
     return this.http.patch(`${this.url}/designer/StartProject`, bookings, {
+      withCredentials: true,
+    });
+  }
+
+  RejectProject(id: any) {
+    const bookings = {
+      id: id,
+    };
+    return this.http.patch(`${this.url}/designer/RejectProject`, bookings, {
       withCredentials: true,
     });
   }

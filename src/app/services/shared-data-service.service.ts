@@ -27,8 +27,6 @@ export class SharedDataServiceService {
   }
   
   setDesignerName(name: string): void{
-    console.log(name,"dksfdkl ");
-    
     this.DesignerName = name
   }
 

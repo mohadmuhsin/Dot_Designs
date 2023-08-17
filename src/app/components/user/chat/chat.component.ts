@@ -49,7 +49,7 @@ export class ChatComponent implements OnInit,AfterViewChecked {
     try {
       this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
     } catch (err) {
-      // Handle any errors related to scrolling (if necessary)
+      console.log(err)
     }
   }
 
@@ -61,7 +61,6 @@ export class ChatComponent implements OnInit,AfterViewChecked {
       this.designers = res.data
       console.log(this.designers);
       Emitters.authEmitter.emit(true)
-      
       this.socket.emit('setup',res.id) 
     })
   }
@@ -105,7 +104,6 @@ export class ChatComponent implements OnInit,AfterViewChecked {
           this.socket.emit('chatMessage',res)
         },error: (err: any) => {
           console.log(err);
-          
         }
       })
     }
