@@ -116,7 +116,7 @@ Pending:string="Pending"
      const _id:any = id
     this.service.RejectProject(_id).subscribe((res)=>{
       console.log(res);
-      this.toastr.success("Project started Successfully","Success",{progressBar:true})
+      this.toastr.warning("Project rejected ",'',{progressBar:true})
       window.location.reload()
     })
   }
@@ -126,7 +126,7 @@ Pending:string="Pending"
     this.service.projectCompleted(_id).subscribe((res)=>{
       console.log(res);
       window.location.reload()
-      this.toastr.success("prject Completed","Success",{progressBar:true})
+      this.toastr.success("project Completed","Success",{progressBar:true})
     })
   }
 }
