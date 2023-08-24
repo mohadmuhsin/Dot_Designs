@@ -25,11 +25,6 @@ export class DesignerSignUpComponent implements OnInit {
       mobileNumber: '',
       password: '',
     });
-
-    // const isLoggedIn = localStorage.getItem('designer');
-    // if (isLoggedIn) {
-    //   this.router.navigate(['/designer']);
-    // }
   }
 
   validateEmail(email: string): boolean {

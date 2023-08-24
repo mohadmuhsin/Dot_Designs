@@ -67,8 +67,6 @@ export class AddCategoryComponent {
         if (!error && result && result.event === 'success') {
           this.imageUrl = result.info.secure_url;
       this.img = this.imageUrl
-
-          console.log('Image URL:', this.imageUrl);
         }
       }
     );
@@ -87,12 +85,9 @@ export class AddCategoryComponent {
       this.toastr.error('Please upload an image', 'Warning!');
     } else {
       category.image = this.imageUrl;
-      console.log(this.img,"dklsffdk");
       
-
       this.service.add_category(category).subscribe(
         (res: any) => {
-          // this.store.dispatch(loadCategories())
           location.reload();
           this.router.navigate(['/add_category']);
           this.toastr.success('Category added', 'Success!');

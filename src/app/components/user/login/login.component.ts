@@ -95,7 +95,6 @@ export class LoginComponent implements OnInit {
         (err) => {
           Emitters.authEmitter.emit(false);
           console.log(err);
-          
           const errorMessage = err.error.message || 'An error occurred';
           this.toastr.warning(errorMessage, 'Error!');
         }
@@ -110,6 +109,9 @@ export class LoginComponent implements OnInit {
     } else {
       this.service.verifyEmailforForget(mail.email).subscribe({
         next: (res: any) => {
+          if (res) {
+            this.toastr.warning("Verify your mail","",{progressBar:true})
+          }
           this.verifiedMail = true;
         },
         error: (err: any) => {
