@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
   private isAuthenticated: boolean = false;
-  private readonly url = 'https://dotdesigns.site';
+  // private readonly url = 'https://dotdesigns.site';
+  private readonly url = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 

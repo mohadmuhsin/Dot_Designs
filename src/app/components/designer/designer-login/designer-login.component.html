@@ -34,11 +34,11 @@
               <div class="flex justify-center items-center my-2">
                 <p>Or Login With</p>
               </div>
-              <div class="mb-4">
-              <button
-                class="w-full bg-[#0B1C39]  hover:bg-[#FFD700] hover:text-[#0B1C39] text-white font-medium py-3 px-4 rounded flex flex-row items-center">
+              <div class="mb-4 mt-1 flex justify-center">
+              <!-- <button
+                class="w-full bg-[#0B1C39]  hover:bg-[#FFD700] hover:text-[#0B1C39] text-white font-medium py-3 px-4 rounded flex flex-row items-center"> -->
                 <asl-google-signin-button name="Google Signup" type="icon" size="medium"></asl-google-signin-button>
-                <span class="mx-auto">Login With Google</span></button>
+                <!-- <span class="mx-auto">Login With Google</span></button> -->
               </div>
               <div class="text-center">
                 <a class="text-sm text-gray-500 cursor-pointer"  onclick="my_modal_3.showModal()"   >Forgot password?</a>
@@ -81,7 +81,7 @@
                         required aria-describedby="email-error">
                     </div>
   
-                    <div *ngIf="verifiedMail" class="relative mb-5">
+                    <!-- <div *ngIf="verifiedMail" class="relative mb-5">
                       <label for="email" class="block text-sm font-bold ml-1 mb-2 dark:text-white">New password</label>
                       <input type="password" id="password" formControlName="password"
                         class="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
@@ -94,7 +94,7 @@
                       <input type="password" id="password" formControlName="confirmPassword"
                         class="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
                         required aria-describedby="email-error">
-                    </div>
+                    </div> -->
   
                     <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email address so
                       we
@@ -103,9 +103,7 @@
                   <button *ngIf="!verifiedMail" type="submit" (click)="verifyMail()"
                     class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">Reset
                     password</button>
-                  <button *ngIf="verifiedMail" type="submit" (click)="changePassword()"
-                    class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">Reset
-                    password</button>
+                  
                 </div>
               </form>
             </div>

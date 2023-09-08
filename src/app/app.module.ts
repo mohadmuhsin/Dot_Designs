@@ -105,6 +105,7 @@ import { UsersComponent } from './components/admin/users/users.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { VisitUsComponent } from './components/user/visit-us/visit-us.component';
 import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
+import { DforgotPasswordComponent } from './components/designer/dforgot-password/dforgot-password.component';
 
 
 const config: SocketIoConfig = {
@@ -169,6 +170,7 @@ const config: SocketIoConfig = {
     UsersComponent,
     VisitUsComponent,
     ForgotPasswordComponent,
+    DforgotPasswordComponent,
 
 
   ],

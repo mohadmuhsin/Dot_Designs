@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
 
     this.ForgotPassword = this.formBuilder.group({
       email: '',
-      password: '',
-      confirmPassword: '',
+      // password: '',
+      // confirmPassword: '',
     });
   }
 
@@ -122,33 +122,5 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  changePassword() {
-    const change = this.ForgotPassword.getRawValue();
-    if (change.password.trim() === '' || change.confirmPassword.trim() === '') {
-      this.toastr.warning("fields can't be empty", '', { progressBar: true });
-    } else if (change.password !== change.confirmPassword) {
-      this.toastr.warning('password should be same', '', { progressBar: true });
-    } else {
-      this.service.changePassword(change).subscribe({
-        next: (res: any) => {
-          const succesMessage = res.message;
-          const currentRoute = this.activeRoute.snapshot.routeConfig?.path;
-          this.router
-            .navigateByUrl('/', { skipLocationChange: true })
-            .then(() => {
-              this.router.navigate([currentRoute]);
-            });
-          this.toastr.success(
-            succesMessage || 'Password changed successfully',
-            '',
-            { progressBar: true }
-          );
-        },
-        error: (err: any) => {
-          const errorMessage = err.error.message;
-          this.toastr.warning(errorMessage, '', { progressBar: true });
-        },
-      });
-    }
-  }
+  
 }

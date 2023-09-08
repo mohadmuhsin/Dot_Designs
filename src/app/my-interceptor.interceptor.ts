@@ -11,7 +11,6 @@ export class MyInterceptorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let authReq = request;
-    let url = request.url;
       const userToken = localStorage.getItem('token');
       authReq = request.clone({
         setHeaders: {

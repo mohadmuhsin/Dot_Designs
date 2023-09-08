@@ -46,6 +46,7 @@ import { DesignersComponent } from './components/admin/designers/designers.compo
 import { UsersComponent } from './components/admin/users/users.component';
 import { VisitUsComponent } from './components/user/visit-us/visit-us.component';
 import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
+import { DforgotPasswordComponent } from './components/designer/dforgot-password/dforgot-password.component';
 
 const routes: Routes = [
   // user
@@ -65,7 +66,7 @@ const routes: Routes = [
   { path: 'designer_designs/:catId/:designerId', canActivate: [userGuard], component: DesignerBasedDesignsComponent },
   { path: 'chating/:id', canActivate: [userGuard], component: ChatComponent },
   { path: 'wishlist', canActivate: [userGuard], component: WishlistComponent },
-  {path:'visitUs',canActivate:[userGuard],component:VisitUsComponent},
+  { path:'visitUs',canActivate:[userGuard],component:VisitUsComponent},
   
 
   // designer
@@ -80,6 +81,7 @@ const routes: Routes = [
   { path: 'designer_login', canActivate: [designerGuard],component: DesignerLoginComponent},
   { path: 'designer_signup',canActivate: [designerGuard],component: DesignerSignUpComponent},
   { path: 'designer/:id/verify/:token', component: DesignerMailVerificationComponent },
+  { path: 'designer/:id/DforgotPassword/:token', component:DforgotPasswordComponent},
   { path: "designerProfile", canActivate: [designerGuard], component: DesignerProfileComponent },
   { path: 'designerChating', canActivate: [designerGuard], component: ChatingComponent },
   { path: 'connection_requests', canActivate: [designerGuard], component: ConnectionRequestsComponent},

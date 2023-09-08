@@ -101,7 +101,10 @@ export class DesignerLoginComponent implements OnInit {
     } else {
       this.service.verifyDesignerEmailforForget(verify.email).subscribe({
         next: (res: any)=>{
-        this.verifiedMail = true   
+          this.verifiedMail = true 
+        if (res) {
+            this.toastr.warning("Verify your mail","",{progressBar:true})
+          }  
         },
         error: (err: any) => {
           const errorMessage = err.error.message
@@ -111,31 +114,6 @@ export class DesignerLoginComponent implements OnInit {
     }
   }
   
-  changePassword() {
-    const change = this.ForgotPassword.getRawValue()
-    if (change.password.trim() === '' || change.confirmPassword.trim() === '') {
-      this.toastr.warning("fields can't be empty","",{progressBar:true})
-    }
-    else if (change.password !== change.confirmPassword) {
-      this.toastr.warning("password should be same","",{progressBar:true})
-    } else {
-      this.service.changeDesignerPassword(change).subscribe({
-        next: (res: any) => {
-          const succesMessage = res.message
-          const currentRoute = this.activeRoute.snapshot.routeConfig?.path;
-        this.router.navigateByUrl('/', { skipLocationChange: true })
-         .then(() => {
-           this.router.navigate([currentRoute]);
-         });
-          this.toastr.success(succesMessage||"Password changed successfully","",{progressBar:true})
-          
-          
-        }, error: (err: any) => {
-          const errorMessage = err.error.message 
-          this.toastr.warning(errorMessage,"",{progressBar:true})
-        }
-      })
-    }
-  }
+  
     
 }

@@ -11,7 +11,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 ForgotPassword!: FormGroup;
-  verifiedMail: boolean = false;
+  mail!: string
 
   constructor(
     private router: Router,
@@ -23,6 +23,15 @@ ForgotPassword!: FormGroup;
   
 
   ngOnInit(): void {
+
+     
+    this.service.user().subscribe({
+      next: (res: any) => {
+        console.log(res,'responsee');
+        this.mail = res.mail
+        
+      }
+    })
     this.ForgotPassword = this.formBuilder.group({
       email: '',
       password: '',
@@ -36,15 +45,11 @@ ForgotPassword!: FormGroup;
     } else if (change.password !== change.confirmPassword) {
       this.toastr.warning('password should be same', '', { progressBar: true });
     } else {
+      change.email = this.mail
       this.service.changePassword(change).subscribe({
         next: (res: any) => {
           const succesMessage = res.message;
-          const currentRoute = this.activeRoute.snapshot.routeConfig?.path;
-          this.router
-            .navigateByUrl('/', { skipLocationChange: true })
-            .then(() => {
-              this.router.navigate([currentRoute]);
-            });
+          this.router.navigate(['/login'])
           this.toastr.success(
             succesMessage || 'Password changed successfully',
             '',

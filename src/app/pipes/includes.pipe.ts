@@ -6,8 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class IncludesPipe implements PipeTransform {
 
   transform(value: any, element: any[]): boolean {
-console.log(value,element,"evdnnna");
-
     return element.includes(value);
   }
 

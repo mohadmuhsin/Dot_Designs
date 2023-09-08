@@ -26,8 +26,7 @@ export class DesignsComponent implements OnInit {
   token:any
   category: any;
   constructor(
-    // private store: Store<DesignState>,
-    private router: Router,
+    
     private toastr:ToastrService,
     private service: AuthServiceService,
     private route: ActivatedRoute,

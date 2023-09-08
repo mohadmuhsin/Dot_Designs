@@ -6,7 +6,8 @@ import { Socket as NgxSocket } from 'ngx-socket-io';
   providedIn: 'root'
 })
 export class SocketService {
-  private readonly url = 'https://dotdesigns.site';
+  private readonly url = 'http://localhost:3000';
+
 
   constructor(private http: HttpClient) {}
 
