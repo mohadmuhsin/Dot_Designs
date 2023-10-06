@@ -12,7 +12,7 @@ export class StateService {
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>('https://dotdesigns.site/retrive_categories',{withCredentials:true});
+    return this.http.get<Category[]>('http://localhost:3000/retrive_categories',{withCredentials:true});
   }
 
 }

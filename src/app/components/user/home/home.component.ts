@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(loadCategories());
     this.category$ = this.store.pipe(select(selectCategories));
     this.category$?.subscribe((res: any) => {
+      console.log(res,'hloooooooooooo');
+      
       this.filteredCategories = res;
     }, (err) => {
       console.log(err.error.message,err);
@@ -57,19 +59,6 @@ export class HomeComponent implements OnInit {
         Emitters.authEmitter.emit(false);
       }
     );
-
-    // retriving
-    // this.store.dispatch(loadCategories());
-    // this.categories$ = this.store.pipe(select(selectCategories));
-    // this.categories$.subscribe((categories) => {
-    //   console.log(categories,"cat");
-    //   this.filteredCategories = categories;
-    // });
-    // for spinner
-    // setTimeout(() => {
-    //   this.Loader = false
-    // }, 2000);
-    // //
   }
 
   toggleShowAllItems() {

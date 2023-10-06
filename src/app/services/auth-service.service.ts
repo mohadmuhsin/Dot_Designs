@@ -6,8 +6,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class AuthServiceService {
   private isAuthenticated: boolean = false;
-  // private readonly url = 'https://dotdesigns.site';
-  private readonly url = 'http://localhost:3000';
+  private readonly url = 'https://dotdesigns.onrender.com';
+  // private readonly url = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -51,7 +51,9 @@ export class AuthServiceService {
   }
 
   getUser(id: any) {
-    return this.http.get(`${this.url}/getUser/${id}`,{withCredentials:true})
+    return this.http.get(`${this.url}/getUser/${id}`, {
+      withCredentials: true,
+    });
   }
 
   user_logout() {
@@ -396,9 +398,13 @@ export class AuthServiceService {
     const bookings = {
       id: id,
     };
-    return this.http.patch(`${this.url}/designer/CancelConsultation`, bookings, {
-      withCredentials: true,
-    });
+    return this.http.patch(
+      `${this.url}/designer/CancelConsultation`,
+      bookings,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   consultationDone(id: any) {

@@ -11,7 +11,10 @@ export class ServiceService {
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>('http://localhost:3000/admin/getCategories',{withCredentials:true});
+    return this.http.get<Category[]>(
+      'https://dotdesigns.onrender.com/admin/getCategories',
+      { withCredentials: true }
+    );
   }
 
 }
