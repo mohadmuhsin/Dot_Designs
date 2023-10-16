@@ -18,9 +18,7 @@ export class AuthServiceService {
   }
 
   login(Data: any, method: string) {
-    return this.http.post(
-      `${this.url}/login`,
-      { Data, method },
+    return this.http.post(`${this.url}/login`, { Data, method },
       { withCredentials: true }
     );
   }
