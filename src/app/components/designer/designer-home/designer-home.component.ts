@@ -45,7 +45,6 @@ export class DesignerHomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.designer(this.designerId).subscribe(
       (res: any) => {
-        console.log(res.data.entity_name,'data');
         this.designer = res.data.entity_name
         this.shareData.setDesignerName(this.designer);
         
@@ -59,7 +58,6 @@ export class DesignerHomeComponent implements OnInit {
 
     this.service.getCategorywiseQoute(this.designerId).subscribe({
       next: (res: any) => {
-        console.log(res,"dklj");
         this.chartData = res.map((item: { categoryName: any; count: any; }) => ({
         name: item.categoryName,
         y: item.count,
@@ -74,8 +72,6 @@ export class DesignerHomeComponent implements OnInit {
     
     this.service.getCatogoryWiseDesigns(this.designerId).subscribe({
       next: (res: any) => {
-        console.log(res,"dklj");
-        
         this.DesignCount = res.map((item: any) => ({
           name: item.categoryName,
           y: item.designCount,

@@ -76,7 +76,6 @@ export class EditDesignComponent implements OnInit {
       this.filteredCategories = categories;
 
       
-      console.log(this.filteredCategories,"ndddddddddd");
     });
 
      this.initializeCloudinaryWidget();

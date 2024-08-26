@@ -5,3 +5,9 @@
 
 @import 'ngx-toastr/toastr';
 
+
+
+::-webkit-scrollbar{
+    display: none;
+}
+

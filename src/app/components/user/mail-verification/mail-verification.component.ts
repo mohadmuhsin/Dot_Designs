@@ -18,7 +18,7 @@ export class MailVerificationComponent implements OnInit {
     private active: ActivatedRoute,
     private toastr: ToastrService,
     private service: AuthServiceService
-  ) {}
+  ) { }
   id!: number;
   token!: number;
 
@@ -29,17 +29,16 @@ export class MailVerificationComponent implements OnInit {
     });
     this.service.getUser(this.id).subscribe({
       next: (res: any) => {
-      this.username = res.username
-        
-    
-    }
+        this.username = res.username
+
+
+      }
     })
   }
   verify() {
     this.service.verify_user_email(this.id, this.token).subscribe(
       (res: any) => {
-        Emitters.authEmitter.emit(true);
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
         this.toastr.success('emial verified successfully', 'Sucess!');
       },
       (err) => {

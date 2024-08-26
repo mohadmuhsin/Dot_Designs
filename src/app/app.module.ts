@@ -109,7 +109,7 @@ import { DforgotPasswordComponent } from './components/designer/dforgot-password
 
 
 const config: SocketIoConfig = {
-	url: environment.socketUrl, 
+	url: environment.Url, 
 	options: {
 	}
 }

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
   private isAuthenticated: boolean = false;
-  private readonly url = 'https://dotdesigns.onrender.com';
-  // private readonly url = 'http://localhost:3000';
+  // private readonly url = ['https://dotdesigns.onrender.com'||"http://localhost:3000"];
+  private readonly url = environment.Url
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  signUp(data: any) {
-    return this.http.post(`${this.url}/signUp`, data, {
+  signUp(data: any, google: boolean) {
+    return this.http.post(`${this.url}/signUp`, { data, google }, {
       withCredentials: true,
     });
   }

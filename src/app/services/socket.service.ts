@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Socket as NgxSocket } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SocketService {
   // private readonly url = 'http://localhost:3000';
-  private readonly url = 'https://dotdesigns.onrender.com';
+  private readonly url = environment.Url;
 
   constructor(private http: HttpClient) {}
 

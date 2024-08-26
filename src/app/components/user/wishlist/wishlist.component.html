@@ -1,6 +1,6 @@
 <app-header></app-header>
 <!-- component -->
-<div class="  container px-4 md:px-6  py-4 flex px-3   items-center">
+<div class="  container px-4 md:px-6  py-4 flex px-3    min-h-screen">
     <!-- - more free and premium Tailwind CSS components at https://tailwinduikit.com/ - -->
     <div class="">
         <!-- <div>
@@ -11,11 +11,11 @@
                 Favourites
             </h1>
         </div>
-        <div class="mt-2">
-            <p class="text-1xl px-2  tracking-tight leading-6 text-gray-600 dark:text-white">0{{count}} items</p>
+        <div class="">
+            <p class="text-1xl px-2   text-gray-600 ">{{count}} items</p>
         </div>
         <div class="flex flex-row ">
-        <div  *ngFor="let design of designs" [routerLink]="['/design_detailView',design._id]" class="mt-6 lg:mt-12 mx-3 text-white rounded-md bg-[#0B1C39]">
+        <div  *ngFor="let design of designs" [routerLink]="['/design_detailView',design._id]" class="mt-3 lg:mt-6 mx-3 shadow shadow-md text-white rounded-md bg-[#0B1C39]">
             <div class="flex flex-col">
                 <div class="relative rounded-md">
                     <img  class=" lg:block w-64 h-48 rounded-t-md" [src]="design.images[0]" alt="bag" />

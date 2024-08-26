@@ -63,7 +63,6 @@ export class ChatingComponent implements OnInit,AfterViewChecked {
     this.service.getUser(user).subscribe({
       next: (res: any)=>{
         this.username = res.username
-
       }
     })
     this.chatService.getFullUserChat(this.userId,this.designerId).subscribe((res: any) => {

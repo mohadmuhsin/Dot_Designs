@@ -31,7 +31,6 @@ export class ChatComponent implements OnInit,AfterViewChecked {
 
 
   ngOnInit(): void {
-  
     this.socket.on('messageReceived',(newMessage:any)=>{   
       if (this.designer == newMessage.sender) {
         this.messages.push(newMessage);
@@ -56,10 +55,8 @@ export class ChatComponent implements OnInit,AfterViewChecked {
   
 
   getchatslist() {
-    
     this.chatService.userchatlist().subscribe((res: any) => {
       this.designers = res.data
-      console.log(this.designers);
       Emitters.authEmitter.emit(true)
       this.socket.emit('setup',res.id) 
     })
@@ -68,7 +65,6 @@ export class ChatComponent implements OnInit,AfterViewChecked {
 
   
   getFullChat(id: any) {
-   
     this.designer=id
     this.chatshow = true
     this.service.designer(id).subscribe({
@@ -87,7 +83,7 @@ export class ChatComponent implements OnInit,AfterViewChecked {
 
 
   sendMessage() {
-
+    
     if (this.message.trim() === '') {
       this.toastr.error("please type anything","Warning!",{progressBar:true})
     } else {

@@ -68,8 +68,6 @@ accepted:string = "accepted"
     }
       
   makeConnection(id: any) {
-    console.log(id,"make connection");
-    
     this.chatService.makeConnection(id).subscribe({
       next: (res: any) => {
         console.log(res);

@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  socketUrl: 'https://dotdesigns.onrender.com',
+  Url: 'http://localhost:3000',
+  // Url: 'https://dotdesigns.onrender.com',
 };

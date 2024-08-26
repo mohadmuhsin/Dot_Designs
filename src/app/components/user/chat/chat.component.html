@@ -19,10 +19,12 @@
                     <span class="font-bold">Active Conversations</span>
                     <!-- <span class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">4</span> -->
                 </div>
-                
-                <div  *ngFor="let designer of designers" class="scroll-hide  flex flex-col space-y-1 mt-4 -mx-2   overflow-y-auto">
-                
-                    <button (click)="getFullChat(designer.connections.designer._id)" class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
+
+                <div *ngFor="let designer of designers"
+                    class="scroll-hide  flex flex-col space-y-1 mt-4 -mx-2   overflow-y-auto">
+
+                    <button (click)="getFullChat(designer.connections.designer._id)"
+                        class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
                         <div class="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full">
                             M
                         </div>
@@ -32,18 +34,18 @@
                             2
                         </div> -->
                     </button>
-                    
+
                 </div>
             </div>
         </div>
-         <div *ngIf="!messages" class="overflow-hidden border border-x border-grey-100  flex flex-col flex-auto h-full">
+        <div *ngIf="!messages" class="overflow-hidden border border-x border-grey-100  flex flex-col flex-auto h-full">
             <div class="  rounded bg-white h-full   flex flex-col items-center justify-center ">
                 <div class="h-1/2    w-1/2 bg-[#0B1C39] rounded-tr flex items-center text-white ">
-                        <!-- <h1>Tap any chat to show message</h1> -->
+                    <!-- <h1>Tap any chat to show message</h1> -->
                     <img src="assets/7495.jpg" alt="" class="text-base ">
-                    
+
                 </div>
-                    <!-- <p> Tap any name to start messaging</p> -->
+                <!-- <p> Tap any name to start messaging</p> -->
             </div>
 
         </div>
@@ -53,27 +55,28 @@
                     <img src="assets/profile.png" alt="" class="h-6 px-8 rounded-full ">
                     <h3 class="text-white ">{{designerr}}</h3>
                 </div>
-                <div class="chatContainerflex scroll-hide  flex flex-col h-full overflow-x-auto mb-4 "#chatContainer>
-                    
+                <div class="chatContainer flex scroll-hide  flex flex-col h-full overflow-x-auto mb-4 " #chatContainer>
+
                     <div class=" flex-col h-full ">
-                        <div *ngFor="let chat of messages"  class=" grid grid-cols-12 gap-y-2">
+                        <div *ngFor="let chat of messages" class=" grid grid-cols-12 gap-y-2">
                             <div *ngIf="chat.sender === designer" class="col-start-1 col-end-8 p-3 rounded-lg">
                                 <div class="flex flex-row items-center">
-                                    <div 
+                                    <div
                                         class="flex items-center justify-center h-10 w-10 rounded-full text-white bg-[#0B1C39] flex-shrink-0">
                                         a
                                     </div>
                                     <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                                         <div>
-                                           {{chat.message}}
+                                            {{chat.message}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div *ngIf="chat.sender === userid"  class="col-start-6 col-end-13 p-3 rounded-lg">
+
+                            <div *ngIf="chat.sender === userid" class="col-start-6 col-end-13 p-3 rounded-lg">
                                 <div class="flex items-center justify-start flex-row-reverse">
-                                    <div class="flex items-center justify-center h-10 w-10 rounded-full text-white bg-[#0B1C39] flex-shrink-0">
+                                    <div
+                                        class="flex items-center justify-center h-10 w-10 rounded-full text-white bg-[#0B1C39] flex-shrink-0">
                                         A
                                     </div>
                                     <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
@@ -98,8 +101,8 @@
                         </button>
                     </div>
                     <div class="flex-grow ml-4">
-                        <div class="relative w-full">  
-                            <input type="text"  [(ngModel)]="message"
+                        <div class="relative w-full">
+                            <input type="text" [(ngModel)]="message"
                                 class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10" />
                             <button
                                 class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
@@ -113,9 +116,8 @@
                         </div>
                     </div>
                     <div class="ml-4">
-                       
-                        <button  (click)="sendMessage()"
-                        
+
+                        <button (click)="sendMessage()"
                             class="flex items-center justify-center text-white bg-[#0B1C39] hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
                             <span>Send</span>
                             <span class="ml-2">
